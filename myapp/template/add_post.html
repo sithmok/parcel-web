@@ -1,0 +1,257 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} แบ่งปันประสบการณ์ของคุณ {% endblock %}
+{% block content %}
+
+<section>
+
+<div class="container-lg pt-3 pb-3" id="el1">
+    <div class="row flex-row-reverse justify-content-center">
+
+        <div class="row justify-content-center px-0 mb-3">
+            <div class="col-xxl-10 col-lg-8 col-md-9 col-sm-10 col-12 px-0">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light py-3" style="border-radius: 5px;">
+                    <div class="container-fluid">
+                      <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb m-0">
+                          <li class="breadcrumb-item"><a href="{% url 'home' %}" class="link-secondary underline-hover">หน้าหลัก</a></li>
+                          <li class="breadcrumb-item"><a href="#" class="link-primary underline-hover">เพิ่มเนื้อหา</a></li>
+                        </ol>
+                      </nav>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+        <div class="col-xxl-4 col-lg-8 col-md-9 col-sm-10 col-12 mb-3 px-0">
+            <div class="card py-3 px-3 shadow-sm">
+                <h3 class="text-center">ข้อตกลงของเรา</h3>
+                <hr class="mt-0">
+                <p>ขอขอบคุณที่คุณร่วมแบ่งปันประสบการณ์ของคุณกับคนอื่นๆ
+                    ประสบการณ์ของคุณมีความหมายและเป็นส่วนสำคัญในการช่วยผู้อื่นในการตัดสินใจเข้าทำงานที่เขารัก</p>
+
+                <p class="m-0">สิ่งที่คุณสามารถโพสได้</p>
+                <ul>
+                    <li><p class="m-0">โอกาสที่ได้รับและบรรยากาศในการทำงาน</p></li>
+                    <li><p class="m-0">ข้อมูลที่เป็นประโยชน์ต่อผู้อื่นในการตัดสินใจเข้าทำงานที่บริษัทนั้นๆ</p></li>
+                    <li><p class="m-0">ความรู้สึกดีหรือแย่ระหว่างทำงานที่บริษัท</p></li>
+                    <li><p class="m-0">ความเห็นส่วนตัวเกี่ยวกับบริษัทโดยรวม</p></li>
+                </ul>
+
+                <p class="m-0">สิ่งที่คุณไม่ควรโพส</p>
+                <ul>
+                    <li><p class="m-0">คำหยาบ คำพูดดูหมิ่นผู้อื่น</p></li>
+                    <li><p class="m-0">สิ่งที่แสดงให้เห็นถึงพฤติกรรมไม่เหมาะสม</p></li>
+                    <li><p class="m-0">ข้อมูลที่เป็นความลับของบริษัท</p></li>
+                </ul>
+
+                <p class="m-0">ขอขอบคุณที่ร่วมเป็นส่วนหนึ่งในการสร้างพื้นที่เพื่อการหาข้อมูลเกี่ยวกับงานสำหรับทุกคน</p>
+            </div>
+        </div>
+
+        <div class="col-xxl-6 col-lg-8 col-md-9 col-sm-10 col-12 px-0">
+            <div class="card py-3 px-3 shadow-sm">
+                <h3 class="text-center">แบ่งปันประสบการณ์การฝึกงาน</h3>
+                <hr class="mt-0">
+                
+
+                <div class="form-group">
+                    <form method="POST" enctype="multipart/form-data">
+
+                        {% csrf_token %}
+                        {{ form.media }}
+
+                        <!-- {% if status %}
+                        <div class="alert alert-success">{{status}}</div>
+                        {% endif %} -->
+
+                        {% if status %}
+                        <div class="alert alert-success d-flex align-items-center fade show" role="alert">
+                            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                            <div>
+                                {{status}}
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>
+                        {% endif %}
+
+                        <div class="col-sm-12">
+                            <img class="img-fluid shadow-2-strong mx-auto d-block pt-3 pb-3" id="file-ip-1-preview" style="width: 100%; max-height: 400px;">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="thumbnail"><p class="m-0">รูปปก <span style="color: rgb(255, 0, 0);">*</span></p></label>
+                            <input type="file" class="form-control" id="file-ip-1" name="thumbnail" accept="image/*" onchange="showPreview(event);" required>
+                        </div>
+
+                        <div class="row mt-2">
+                            <div class="col-lg-6">
+                                <label for="title"><p class="m-0">ชื่อบริษัท <span style="color: rgb(255, 0, 0);">*</span></p></label>
+                                <input type="text" class="form-control" id="title" name="title" placeholder="ชื่อบริษัท" required>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <label for="prov"><p class="m-0">จังหวัด <span style="color: rgb(255, 0, 0);">*</span></p></label>
+                                <select class="form-select" name="prov" required>
+                                    <option value="" selected hidden disabled>เลือก...</option>
+                                    {% for p in prov_name %}
+                                    <option value="{{ p.id }}">{{ p.prov_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mt-2">
+                            <label class="form-label m-0"><p class="m-0">ที่ตั้งบริษัท <span style="color: rgb(255, 0, 0);">*</span></p></label>
+                            <div class="col-lg-3 mb-2">
+                                <input type="text" class="form-control" id="location" name="location" placeholder="ถนน" required>
+                                <!-- <small class="form-text text-muted">ถนน</small> -->
+                            </div>
+                            <div class="col-lg-3 mb-2">
+                                <input type="text" class="form-control" id="location2" name="location2" placeholder="ซอย" required>
+                                <!-- <small class="form-text text-muted">ซอย</small> -->
+                            </div>
+                            <div class="col-lg-3 mb-2">
+                                <input type="text" class="form-control" id="location3" name="location3" placeholder="ตำบล" required>
+                                <!-- <small class="form-text text-muted">ตำบล</small> -->
+                            </div>
+                            <div class="col-lg-3 mb-2">
+                                <input type="text" class="form-control" id="location4" name="location4 " placeholder="อำเภอ" required>
+                                <!-- <small class="form-text text-muted">อำเภอ</small> -->
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <label for="Intern_type"><p class="m-0">ประเภทการฝึกงาน <span style="color: rgb(255, 0, 0);">*</span></p></label>
+                            <select class="form-select" name="Intern_type" required>
+                                <option value="" disabled selected hidden>เลือก...</option>
+                                <option value="ปกติ">ปกติ</option>
+                                <option value="สหกิจ">สหกิจ</option>
+                            </select>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6 mt-2">
+                                <label for="position"><p class="m-0">ตำแหน่ง <span style="color: rgb(255, 0, 0);">*</span></p></label>
+                                <input type="text" class="form-control" id="position" name="position" placeholder="video editor, content creator, etc." required>
+                            </div>
+                            <div class="col-lg-6 mt-2">
+                                <label for="money"><p class="m-0">ค่าตอบแทน</p></label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control" id="money" name="money" placeholder="จำนวน" min="0" max="100000" value="0">
+                                    <select class="form-select" id="money_type" aria-label="Default select example" name="money_type">
+                                        <option value="" disabled selected hidden>เลือก...</option>
+                                        <option value="วัน">วัน</option>
+                                        <option value="สัปดาห์">สัปดาห์</option>
+                                        <option value="เดือน">เดือน</option>
+                                    </select>
+                                </div>
+                                <small class="form-text text-muted text-grey">ในกรณีที่ไม่มีค่าตอบแทนให้ข้ามในส่วนนี้ไป</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label for="body"><p class="m-0">ที่มาและเหตุผลที่คุณเลือกฝึกงานกับบริษัทนี้ <span style="color: rgb(255, 0, 0);">*</span></p></label>
+                            <textarea class="form-control" name="introduce" cols="5" rows="5" required></textarea>
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label for="body"><p class="m-0">บริษัทที่ฝึกงานมีจุดประสงค์หรือมีการทำงานเกี่ยวกับอะไรบ้าง</p></label>
+                            <textarea id="editor1" class="form-control" name="body" cols="5" rows="5"></textarea>
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label for="body2"><p class="m-0">สภาพแวดล้อม เพื่อนร่วมงาน พี่เลี้ยง และบรรยากาศในการทำงานเป็นอย่างไรบ้าง</p></label>
+                            <textarea id="editor2" class="form-control" name="body2" cols="5" rows="5"></textarea>
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label for="body3"><p class="m-0">งานหรือสิ่งที่ได้รับมอบหมายให้ทำตลอดระยะเวลาการฝึกงาน</p></label>
+                            <textarea id="editor3" class="form-control" name="body3" cols="5" rows="5"></textarea>
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label for="body4"><p class="m-0">การเตรียมตัวและข้อเสนอแนะเพิ่มเติมสำหรับผู้ที่สนใจ</p></label>
+                            <textarea id="editor4" class="form-control" name="body4" cols="5" rows="5"></textarea>
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label for="body5"><p class="m-0">ช่องทางการติดต่อบริษัท</p></label>
+                            <textarea id="editor5" class="form-control" name="body5" cols="5" rows="5"></textarea>
+                        </div>
+
+                        <div class="mt-2">
+                            <label for="rating"><p class="m-0">คะแนนภาพรวม <span style="color: rgb(255, 0, 0);">*</span></p></label>
+                            <select class="form-select" name="rating" required>
+                                <option value="" disabled selected hidden>เลือก...</option>
+                                <option value="น้อยมาก">น้อยมาก</option>
+                                <option value="น้อย">น้อย</option>
+                                <option value="พอใช้">พอใช้</option>
+                                <option value="มาก">มาก</option>
+                                <option value="มากที่สุด">มากที่สุด</option>
+                            </select>
+                        </div>
+
+                        <!-- internWorks -->
+
+                        <!-- <div id="lesson-input" class="mt-2">
+							<label for="form-label"><p class="m-0">ลิงก์ผลงาน (URL)</p></label>
+                            <div class="row" id="internworks-input-row">
+                                <div class="col-6 internworks-left-1 pe-1">
+                                    <input type="text" class="form-control" name="internwork" id="lessonTitle" placeholder="google, github, youtube, etc (1)"/>
+                                </div>
+                                <div class="col-6 internworks-right-1 ps-1">
+                                    <input type="text" class="form-control" name="internworkTitle" id="lessonTitle" placeholder="ชื่อผลงาน (1)"/>
+                                </div>
+                                <div class="col-12 mt-1">
+                                    <textarea class="form-control" name="internworkDetail" cols="30" rows="2" placeholder="รายละเอียดผลงาน (1)"></textarea>
+                                </div>
+                            </div>
+						</div>
+
+						<div class="d-flex justify-content-end my-2">
+							<button class="btn btn-outline-primary btn-sm" type="button" onclick="addinternWorks()">เพิ่มช่อง</button>
+						</div> -->
+
+                        <!-- otherPostImage -->
+
+                        <div id="lesson-input" class="mt-2">
+							<label for="form-label"><p class="m-0">รูปภาพเพิ่มเติม</p></label>
+                            <div class="row" id="lesson-input-row">
+                                <div class="col-6 left-1 pe-1">
+                                    <input type="file" class="form-control" name="image" id="lessonTitle"/>
+                                </div>
+                                <div class="col-6 right-1 ps-1">
+                                    <input type="text" class="form-control" name="imageTitle" id="lessonTitle" placeholder="ชื่อรูปภาพ (1)"/>
+                                </div>
+                            </div>
+						</div>
+
+						<div class="d-flex justify-content-end my-2" >
+							<button class="btn btn-outline-primary btn-sm" type="button" onclick="addotherPostImage()">เพิ่มช่อง</button>
+						</div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">ยืนยัน</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<button class="gotoBottom1 btn btn-outline-primary bg-white" onclick="scrollFunction1()" style="z-index: 9999;"><i class="fa-solid fa-arrow-up"></i></button>
+<button class="gotoBottom2 btn btn-outline-primary bg-white" onclick="scrollFunction2()" style="z-index: 9999;"><i class="fa-solid fa-arrow-down"></i></button>
+
+
+<script src="{% static "js/addclassCK.js" %}"></script>
+<script src="{% static "js/ckeditor.js" %}"></script>
+<script src="{% static "js/scroll.js" %}"></script>
+<script src="{% static "js/addinternWorks.js" %}"></script>
+<script src="{% static "js/addotherPostImage.js" %}"></script>
+<script src="{% static "js/imagePreview.js" %}"></script>
+
+{% endblock content %}

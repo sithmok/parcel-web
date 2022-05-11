@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %} Login {% endblock %}
+
+{% block content %}
+
+    
+<div class="signup">
+    <div class="newsignup cusheight">
+        <div class="newsignup__wrapper">
+            <div class="newsignup__contentwrap">
+                <div class="newsignup__imgcontentbox">
+                    <div class="newsignup__imgcontentbox--box">
+                        <img src="/media/static_web/chilling.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="newsignup__contentwrap">
+                <div class="border" style="color: rgba(0, 0, 0, 0.87); background-color: rgb(255, 255, 255);  border-radius: 10px; width: 100%; padding: 10% 2%;">
+                    <div class="newsignup__inner">
+                        <div class="newsignup__content">
+                            <div class="newlogin__text--title color-black">
+                                <h1 class=" mb-3 text-center">เข้าสู่ระบบ</h1>
+                            </div>
+                            {% if messages %}
+                                {% for message in messages %}
+                            <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                                    {{message}}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                            <div class="newsignup__form">
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <!-- คำสั่งทำให้ฟอร์มสามารถใช้งานได้ของ django -->
+                                    <div class="input-signup mb-3">
+                                        <!-- <label for="first_name">ชื่อ:</label> -->
+                                        <span><i class="fas fa-user"></i></span>
+                                        <input type="text" class="form-control" id="username" name="username"
+                                            placeholder="username">
+                                    </div>
+
+                                    <div class="input-signup mb-3">
+                                        <!-- <label for="password">รหัสผ่าน:</label> -->
+                                        <span><i class="fas fa-lock"></i></span>
+                                        <input type="password" class="form-control" id="password" name="password"
+                                            placeholder="รหัสผ่าน">
+                                    </div>
+
+                                    <div class="d-grid gap-2">
+                                        <button type="submit" class="btn btn-primary btn-block">เข้าสู่ระบบ</button>
+                                        <a class="btn btn-light btn-signin" href="{% url 'register' %}">สมัครสมาชิกที่นี่</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'footer.html' %}
+
+
+{% endblock content %}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %} โปรไฟล์โพส {% endblock %}
+
+{% block content %}
+
+<div class="container">
+        {% include 'profile_base.html' %}
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card mb-4 mb-md-0">
+                    <div class="card-body">
+                        <div class="row">
+                        {% for p in post %}
+
+                        <div class="col-xxl-3 col-lg-4 col-md-6 col-sm-12">
+            
+                            <div class="card card-hove mb-3" style="border-radius: 15px; border: none;">
+                                <a href="{% url 'article-detail' p.id %}" style="text-decoration: none; color: #000000;">
+                                <div class="card-img">
+                                    <img src="{{ p.image.url }}" alt="" style="width: 100%; height: 200px; border-top-left-radius: 15px; border-top-right-radius: 15px;">
+                                </div>
+                                <div class="card-body">
+                                    
+                                    <p class="card-text mb-1 ">
+                                        <span class="badge badge-pill badge-warning"> <i class="fa fa-clock-o"></i>
+                                            {{p.post_date }}</span>
+                                    </p>
+                
+                                    <p class="card-text mb-1 text-uppercase">บริษัท : {{ p.title }}</p>
+                                    <p class="card-text mb-1 text-uppercase">ตำแหน่ง : {{ p.position }}</p>
+                                    <p class="card-text mb-1 text-uppercase">ค่าตอบแทน : {{ p.money }}</p>
+                                    <p class="card-text mb-1 text-uppercase">ความประทับใจ : {{ p.rating }}</p>
+                
+                                </div>
+                                </a>
+                                <div class="card-bottom p-2">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <p class="my-auto px-2">20 likes</p>
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="text-end">
+                                                {% if user.profile.id == p.createBy.id %}
+                                                    <a class="btn btn-orange" href="{% url 'update-post' p.id %}">แก้ไข</a>
+                                                    <a class="btn btn-danger" href="{% url 'delete-post' p.id %}">ลบ</a>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+{% include 'footer.html' %}
+{% endblock content %}

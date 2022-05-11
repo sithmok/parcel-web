@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} แอดมินโพสต์ {% endblock %}
+{% block content %}
+
+<section class="py-5">
+
+  <div class="container-lg light-style flex-grow-1 container-p-y">
+
+    <div class="card overflow-hidden px-3 shadow-sm">
+
+      <div class="row no-gutters row-bordered row-border-light">
+        <div class="col-md-3 pt-0 navbar-expand-lg px-0">
+          {% include 'admin_base.html' %}
+        </div>
+        <div class="col-md-9 px-0">
+          <div class="tab-content">
+            <div class="tab-pane fade active show" id="account-general">
+
+              <div class="card-body pb-0">
+                <h4 class="align-bottom mt-2 mb-0">สมาชิก</h4>
+                <hr>
+              </div>
+
+              <div class="card-body">
+
+                <form method="POST" enctype="multipart/form-data">
+
+                  {% csrf_token %}
+                  {{ form.media }}
+
+                  <div id="toolbar">
+                    <button class="btn btn-danger" type="submit"> ลบทั้งหมด </button>
+                  </div>
+
+                  <table data-toggle="table" class="table" data-click-to-select="true"  data-search="true" data-pagination="true" data-page-list="[10, 20, 30, all]" data-toolbar="#toolbar" style="width:100%">
+                    
+                    <thead>
+                      <tr>
+                        <th data-width="30" ><input type="checkbox" onClick='toggle1(this)' /></th>
+                        <th scope="col" data-sortable="true">ชื่อ-นามสกุล</th>
+                        <th scope="col" data-sortable="true">อึเมล</th>
+                        <th scope="col" data-sortable="true">สถานะ</th>
+                        <th scope="col" data-width="30" class="text-center">ดู</th>
+                        <th scope="col" data-width="30" class="text-center">ลบ</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      {% for p in profile %}
+                      <tr>
+                        <th style="padding: 12px;"><input type="checkbox" name="check1[]" value="{{p.pk}}"></th>
+                        <td>{{p.user.first_name}} {{p.user.last_name}}</td>
+                        <td>{{p.user.email}}</td>
+                        <td>{{p.usertype}}</td>
+                        <td><a href="/profile/{{p.username}}" target="_blank" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></a></td>
+                        <td><a href="/admin-delete-member/{{p.id}}/" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+
+                  </table>
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="{% static "js/checkboxAll.js" %}"></script>
+
+{% endblock content %}

@@ -1,0 +1,308 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} แก้ไขเนื้อหาของคุณ {% endblock %}
+{% block content %}
+
+<section style="background-color: #ffffff;">
+
+    <div class="container-lg pt-3 pb-3">
+
+        <div class="row justify-content-center px-0">
+            <div class="col-xxl-10 col-lg-8 col-md-9 col-sm-10 col-12 px-0">
+              {% if messages %}
+              {% for message in messages %}
+              <div class="alert alert-{{message.tags}} alert-dismissible fade show mt-4 mb-4 mx-auto" role="alert">
+              
+              <p class="m-0">{{message}}</p>
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+              </div>
+              {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+
+        <div class="row flex-row-reverse justify-content-center">
+
+            <div class="row justify-content-center px-0 mb-3">
+                <div class="col-xxl-10 col-lg-8 col-md-9 col-sm-10 col-12 px-0">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light py-3" style="border-radius: 5px;">
+                        <div class="container-fluid">
+                          <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="/profile/{{user.profile.username}}" class="link-secondary underline-hover">โปรไฟล์</a></li>
+                              <li class="breadcrumb-item"><a href="#" class="link-primary underline-hover">แก้ไขเนื้อหา</a></li>
+                            </ol>
+                          </nav>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            
+            <div class="col-xxl-4 col-lg-8 col-md-9 col-sm-10 col-12 mb-4 px-0">
+                
+                <div class="card py-3 px-3 shadow-sm">
+                    <h3 class="text-center">ข้อตกลงของเรา</h3>
+                    <hr class="mt-0">
+                    <p>ขอขอบคุณที่คุณร่วมแบ่งปันประสบการณ์ของคุณกับคนอื่นๆ
+                        ประสบการณ์ของคุณมีความหมายและเป็นส่วนสำคัญในการช่วยผู้อื่นในการตัดสินใจเข้าทำงานที่เขารัก</p>
+    
+                    <p class="m-0">สิ่งที่คุณสามารถโพสได้</p>
+                    <ul>
+                        <li><p class="m-0">โอกาสที่ได้รับและบรรยากาศในการทำงาน</p></li>
+                        <li><p class="m-0">ข้อมูลที่เป็นประโยชน์ต่อผู้อื่นในการตัดสินใจเข้าทำงานที่บริษัทนั้นๆ</p></li>
+                        <li><p class="m-0">ความรู้สึกดีหรือแย่ระหว่างทำงานที่บริษัท</p></li>
+                        <li><p class="m-0">ความเห็นส่วนตัวเกี่ยวกับบริษัทโดยรวม</p></li>
+                    </ul>
+    
+                    <p class="m-0">สิ่งที่คุณไม่ควรโพส</p>
+                    <ul>
+                        <li><p class="m-0">คำหยาบ คำพูดดูหมิ่นผู้อื่น</p></li>
+                        <li><p class="m-0">สิ่งที่แสดงให้เห็นถึงพฤติกรรมไม่เหมาะสม</p></li>
+                        <li><p class="m-0">ข้อมูลที่เป็นความลับของบริษัท</p></li>
+                    </ul>
+    
+                    <p class="m-0">ขอขอบคุณที่ร่วมเป็นส่วนหนึ่งในการสร้างพื้นที่เพื่อการหาข้อมูลเกี่ยวกับงานสำหรับทุกคน</p>
+                </div>
+            </div>
+
+            <div class="col-xxl-6 col-lg-8 col-md-9 col-sm-10 col-12 mb-4 px-0">
+                <div class="card py-3 px-3 shadow-sm">
+                    <h3 class="text-center" id="el1">แบ่งปันประสบการณ์การฝึกงาน</h3>
+                    <hr class="mt-0">
+                    <div class="form-group">
+                        <form method="POST" enctype="multipart/form-data">
+
+                            {% csrf_token %}
+                            {{ form.media }}
+                            <div class="col-sm-12">
+                                <img class="img-fluid shadow-2-strong mx-auto d-block pb-3 pt-3" id="file-ip-1-preview" 
+                                src="{{ post.thumbnail.url }}"  style="width: 100%; max-height: 400px;">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="thumbnail"><p class="m-0">รูปปก</p></label>
+                                <input type="file" class="form-control" id="file-ip-1" name="thumbnail" accept="image/*" onchange="showPreview(event);">
+                            </div>
+
+                            <div class="row mt-2">
+                                <div class="col-lg-6">
+                                    <label for="title"><p class="m-0">ชื่อบริษัท <span style="color: rgb(255, 0, 0);">*</span></p></label>
+                                    <input type="text" class="form-control" id="title" name="title" placeholder="ชื่อบริษัท" value="{{post.title}}" required>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <label for="prov"><p class="m-0">จังหวัด <span style="color: rgb(255, 0, 0);">*</span></p></label>
+                                    <select class="form-select" name="prov" required>
+                                        <option selected value="{{ post.prov.id }}">{{ post.prov }}</option>
+                                        {% for p in prov_name %}
+                                        <option value="{{ p.id }}">{{ p.prov_name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mt-2">
+                                <label class="form-label m-0"><p class="m-0">ที่ตั้งบริษัท <span style="color: rgb(255, 0, 0);">*</span></p></label>
+                                <div class="col-lg-3 mb-2">
+                                    <input type="text" class="form-control" id="location" name="location" placeholder="ถนน" value="{{post.location}}" required>
+                                </div>
+                                <div class="col-lg-3 mb-2">
+                                    <input type="text" class="form-control" id="location2" name="location2" placeholder="ซอย" value="{{post.location2}}" required>
+                                </div>
+                                <div class="col-lg-3 mb-2">
+                                    <input type="text" class="form-control" id="location3" name="location3" placeholder="ตำบล" value="{{post.location3}}" required>
+                                </div>
+                                <div class="col-lg-3 mb-2">
+                                    <input type="text" class="form-control" id="location4" name="location4 " placeholder="อำเภอ" value="{{post.location4}}" required>
+                                </div>
+                            </div>
+
+                            <div class="">
+                                <label for="Intern_type"><p class="m-0">ประเภทการฝึกงาน <span style="color: rgb(255, 0, 0);">*</span></p></label>
+                                <select class="form-select" name="Intern_type" required>
+                                    <option selected value="{{ post.Intern_type }}">{{ post.Intern_type }}</option>
+                                    <option value="ฝึกงาน">ปกติ</option>
+                                    <option value="งานประจำ">สหกิจ</option>
+                                </select>
+                            </div>
+
+                            <div class="row mt-2">
+                                <div class="col-lg-6">
+                                    <label for="position"><p class="m-0">ตำแหน่ง <span style="color: rgb(255, 0, 0);">*</span></p></label>
+                                    <input type="text" class="form-control" id="position" name="position" placeholder="ตำแหน่ง" value="{{ post.position }}" required>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="money"><p class="m-0">ค่าตอบแทน</p></label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="money" name="money" placeholder="จำนวน" min="0" max="100000" value="{{ post.money }}">
+                                        <select class="form-select" id="money_type" aria-label="Default select example" name="money_type">
+                                            {% if post.money_type %}
+                                            <option selected value="{{post.money_type}}">{{post.money_type}}</option>
+                                            {% else %}
+                                            <option value="" disabled selected hidden>เลือก...</option>
+                                            {% endif %}
+                                            <option value="วัน">วัน</option>
+                                            <option value="สัปดาห์">สัปดาห์</option>
+                                            <option value="เดือน">เดือน</option>
+                                        </select>
+                                    </div>
+                                    <small class="form-text text-muted text-grey">ในกรณีที่ไม่มีค่าตอบแทนให้ปล่อยว่าง</small>
+                                
+                                </div>
+                            </div>
+
+                            <div class="form-group mt-2">
+                                <label for="body"><p class="m-0">ที่มาและเหตุผลที่เลือกฝึกงานกับบริษัทนี้ <span style="color: rgb(255, 0, 0);">*</span></p></label>
+                                <textarea class="form-control p-title" name="introduce" cols="5" rows="5" required>{{ post.introduce }}</textarea>
+                            </div>
+
+                            <div class="form-group mt-2">
+                                <label for="body"><p class="m-0">บริษัทที่ฝึกงานมีจุดประสงค์หรือมีการทำงานเกี่ยวกับอะไรบ้าง</p></label>
+                                <textarea id="editor1" class="form-control" name="body" cols="5">{{ post.body }}</textarea>
+                            </div>
+
+                            <div class="form-group mt-2">
+                                <label for="body2"><p class="m-0">สภาพแวดล้อม เพื่อนร่วมงาน พี่เลี้ยง และบรรยากาศในการทำงานเป็นอย่างไรบ้าง</p></label>
+                                <textarea id="editor2" class="form-control" name="body2" cols="5">{{ post.body2 }}</textarea>
+                            </div>
+                           
+                            <div class="form-group mt-2">
+                                <label for="body3"><p class="m-0">งานหรือสิ่งที่ได้รับมอบหมายให้ทำตลอดระยะเวลาการฝึกงาน</p></label>
+                                <textarea id="editor3" class="form-control" name="body3" cols="5">{{ post.body3 }}</textarea>
+                            </div>
+                           
+                            <div class="form-group mt-2">
+                                <label for="body4"><p class="m-0">การเตรียมตัวและข้อเสนอแนะเพิ่มเติมสำหรับผู้ที่สนใจ</p></label>
+                                <textarea id="editor4" class="form-control" name="body4" cols="5">{{ post.body4 }}</textarea>
+                            </div>
+
+                            <div class="form-group mt-2">
+                                <label for="body5"><p class="m-0">ช่องทางการติดต่อบริษัท</p></label>
+                                <textarea id="editor5" class="form-control" name="body5" cols="5">{{ post.body5 }}</textarea>
+                            </div>
+
+                            <div class="mt-2">
+                                <label for="rating"><p class="m-0">คะแนนภาพรวม <span style="color: rgb(255, 0, 0);">*</span></p></label>
+                                <select class="form-select" name="rating" required>
+                                    <option selected value="{{ post.rating }}">{{ post.rating }}</option>
+                                    <option value="น้อยมาก">น้อยมาก</option>
+                                    <option value="น้อย">น้อย</option>
+                                    <option value="พอใช้">พอใช้</option>
+                                    <option value="มาก">มาก</option>
+                                    <option value="มากที่สุด">มากที่สุด</option>
+                                </select>
+                            </div>
+
+                            {% if work %}
+                            <div class="form-group mt-2">
+                                <label class="form-label m-0">ลิงก์ผลงาน {% if work %}( <input type="checkbox" onClick='toggle2(this)'> เลือกทั้งหมด ){% endif %}</label>
+                                
+                                    
+                                <div class="row">
+                                {% for w in work %}
+                                <!-- <div class="col-4 mt-2">
+                                    <img class="img-fluid shadow-2-strong mx-auto d-block pb-3" id="file-ip-1-preview" 
+                                    src="{{ i.image.url }}"  style="width: 100%; max-height: 400px;">
+                                </div> -->
+                                
+                                <div class="col-7 mb-2">
+                                    <input type="text" class="form-control" value="{{ w.work_name }}" disabled/>
+                                </div>
+                                <div class="col-3 mb-2 ps-0">
+                                    <a href="edit-otherPostImage/{{i.id}}/" class="btn btn-outline-primary btn-block">แก้ไข</a>
+                                </div>
+                                <div class="col-2 mb-2">
+                                        <div class="form-check mt-2 p-0">
+                                            <label class="form-check-label" for="flexCheckDefault">ลบ</label>
+                                            <input class="form-check-input ml-3" type="checkbox" name="check2[]" value="{{i.pk}}">
+                                        </div>
+                                </div>
+                                <!-- <a href="delete-otherPostImage/{{i.id}}/" class="btn btn-danger btn-block">ลบ</a> -->
+                                
+                                {% endfor %}
+                                </div>
+                            </div>
+                            {% endif %}
+
+
+
+                            {% if image %}
+                            <div class="form-group mt-2">
+                                <label class="form-label m-0">รูปภาพเพิ่มเติม {% if image %}( <input type="checkbox" onClick='toggle1(this)'> เลือกทั้งหมด ){% endif %}</label>
+                                
+                                    
+                                <div class="row">
+                                {% for i in image %}
+                                <!-- <div class="col-4 mt-2">
+                                    <img class="img-fluid shadow-2-strong mx-auto d-block pb-3" id="file-ip-1-preview" 
+                                    src="{{ i.image.url }}"  style="width: 100%; max-height: 400px;">
+                                </div> -->
+                                
+                                <div class="col-7 mb-2">
+                                    <input type="text" class="form-control" value="{{ i.image_name }}" disabled/>
+                                </div>
+                                <div class="col-3 mb-2 ps-0">
+                                    <a href="edit-otherPostImage/{{i.id}}/" class="btn btn-outline-primary btn-block">แก้ไข</a>
+                                </div>
+                                <div class="col-2 mb-2">
+                                        <div class="form-check mt-2 p-0">
+                                            <label class="form-check-label" for="flexCheckDefault">ลบ</label>
+                                            <input class="form-check-input ml-3" type="checkbox" name="check1[]" value="{{i.pk}}">
+                                        </div>
+                                </div>
+                                <!-- <a href="delete-otherPostImage/{{i.id}}/" class="btn btn-danger btn-block">ลบ</a> -->
+                                
+                                {% endfor %}
+                                </div>
+                            </div>
+                            {% endif %}
+
+
+                            
+                            <div id="lesson-input" class="mt-2">
+                                <label class="form-label m-0">เพิ่มรูปภาพเพิ่มเติม</label>
+                                <div class="row" id="lesson-input-row">
+                                    <!-- {% for i in image %}
+                                    <div class="col-5">
+                                        <input type="file" class="form-control" name="image" id="lessonTitle"/>
+                                    </div>
+                                    <div class="col-7">
+                                        <input type="text" class="form-control" name="imageTitle" id="lessonTitle"/>
+                                    </div>
+                                    {% endfor %} -->
+
+                                    <div class="col-6 left-1 pe-1">
+                                        <input type="file" class="form-control" name="image" id="lessonTitle"/>
+                                    </div>
+                                    <div class="col-6 right-1 ps-1">
+                                        <input type="text" class="form-control" name="imageTitle" id="lessonTitle" placeholder="ชื่อรูปภาพ"/>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="d-flex justify-content-end my-3" id="el2">
+                                <button class="btn btn-outline-primary" type="button" onclick="addotherPostImage()">เพิ่มช่อง</button>
+                            </div>
+                            
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">ยืนยัน</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<button class="gotoBottom1 btn btn-outline-primary bg-white" onclick="scrollFunction1()"><i class="fa-solid fa-arrow-up"></i></button>
+<button class="gotoBottom2 btn btn-outline-primary bg-white" onclick="scrollFunction2()"><i class="fa-solid fa-arrow-down"></i></button>
+
+<script src="{% static "js/checkboxAll.js" %}"></script>
+<script src="{% static "js/scroll.js" %}"></script>
+<script src="{% static "js/addotherPostImage.js" %}"></script>
+<script src="{% static "js/imagePreview.js" %}"></script>
+<script src="{% static "js/ckeditor.js" %}"></script>
+{% include 'footer.html' %}
+{% endblock content %}

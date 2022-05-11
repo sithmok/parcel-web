@@ -1,0 +1,90 @@
+
+    <div class="containe position-relative bg-white" style="min-height: 200px;">
+        <div class="row">
+            <div class="col-xxl-7 col-lg-8 col-md-10 col-sm-10 mx-auto position-absolute top-0 start-50 translate-middle">
+                <div class="card px-5 py-4 shadow-sm" style="border-radius: 20px;">
+                    <h2 class="text-center pb-3">ค้นหาประสบการณ์ที่คุณสนใจ</h2>
+                    <form method="GET" action=".">
+                        <div class="row">
+
+                            <div class="col-xxl-6 col-lg-6 col-md-6 col-sm-6">
+                                <!-- <div class="md-form" >
+                                    <input class="form-control" type="text" placeholder="ค้นหาด้วยชื่อบริษัท หรือตำแหน่ง" aria-label="Search" style="border-width: 2px; border-radius: 10px;">
+                                </div> -->
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">ชื่อบริษัท</span>
+                                    <input type="search" name="company_contains" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="ค้นหาด้วยชื่อบริษัท">
+                                </div>
+                            </div>
+
+                            <div class="col-xxl-6 col-lg-6 col-md-6 col-sm-6">
+                                <!-- <div class="md-form" >
+                                    <input class="form-control" type="text" placeholder="ค้นหาด้วยชื่อบริษัท หรือตำแหน่ง" aria-label="Search" style="border-width: 2px; border-radius: 10px;">
+                                </div> -->
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">ตำแหน่ง</span>
+                                    <input type="search" name="position_contains" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="ค้นหาด้วยชื่อตำแหน่ง">
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row justify-content-between pt-4">
+
+                            <div class="col-xxl-3 col-lg-3 col-md-6 col-sm-6">
+                                <div class="input-group">
+                                    <select class="form-select" id="province" aria-label="Default select example" name="province">
+                                        <option selected>เลือก...</option>
+                                        {% for p in prov_name %}
+                                        <option value="{{ p.id }}">{{ p.prov_name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-xxl-3 col-lg-3 col-md-6 col-sm-6">
+                                <div class="input-group">
+                                    <select class="form-select" id="intern_type" aria-label="Default select example" name="intern_type">
+                                    <option selected>เลือก...</option>
+                                    <option value="1">ปกติ</option>
+                                    <option value="2">สหกิจ</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- <div class="col-xxl-3 col-lg-3 col-md-6 col-sm-6">
+                                <div class="input-group">
+                                    <select class="form-select" id="inputGroupSelect01" aria-label="Default select example">
+                                    <option selected>เลือก...</option>
+                                    <option value="1">มี</option>
+                                    <option value="2">ไม่มี</option>
+                                    </select>
+                                </div>
+                            </div> -->
+
+                            <div class="col-xxl-3 col-lg-3 col-md-6 col-sm-6">
+                                <div class="input-group">
+                                    <select class="form-select" id="rating" aria-label="Default select example" name="rating">
+                                    <option selected>เลือก...</option>
+                                    <option value="1">น้อยมาก</option>
+                                    <option value="2">น้อย</option>
+                                    <option value="3">ปานกลาง</option>
+                                    <option value="4">มาก</option>
+                                    <option value="5">มากที่สุด</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <button type="submit" class="btn btn-orange">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+  

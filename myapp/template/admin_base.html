@@ -1,0 +1,10 @@
+
+<div class="list-group list-group-flush account-settings-links">
+
+  <a class="list-group-item list-group-item-action border-bottom {% if request.resolver_match.view_name == 'admin-post' %} active {% endif %}" href="{% url 'admin-post' %}">เนื้อหาทั้งหมด</a>
+
+  <a class="list-group-item list-group-item-action border-bottom {% if request.resolver_match.view_name == 'admin-confirm' %} active {% endif %}" href="{% url 'admin-confirm' %}">เนื้อหารอการอนุมัติ</a>
+
+  <a class="list-group-item list-group-item-action border-bottom {% if request.resolver_match.view_name == 'admin-member' %} active {% endif %}" href="{% url 'admin-member' %}">สมาชิก</a>
+
+</div>

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title %} Register {% endblock %}
+{% block content %}
+
+<div class="signup">
+    <div class="newsignup cusheight">
+        <div class="newsignup__wrapper">
+            <div class="newsignup__contentwrap">
+                <div class="newsignup__imgcontentbox">
+                    <div class="newsignup__imgcontentbox--box">
+                        <img src="/media/static_web/chilling.png" alt="">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="newsignup__contentwrap">
+                <div class="border" style="color: rgba(0, 0, 0, 0.87); background-color: rgb(255, 255, 255);  border-radius: 10px; width: 100%; padding: 10% 2%;">
+                    <div class="newsignup__inner">
+                        <div class="newsignup__content">
+                            <div class="newlogin__text--title color-black">
+                                <h1 class=" mb-3 text-center">สมัครสมาชิก</h1>
+                            </div>
+                            {% if messages %}
+                                {% for message in messages %}
+                            <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+                                    {{message}}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                            <div class="newsignup__form">
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <div class="input-signup mb-3">
+                                        <span><i class="fas fa-user"></i></span>
+                                        <input type="text" class="form-control" id="user_name" name="user_name" placeholder="username" required>
+                                    
+                                    </div>
+
+                                    <div class="input-signup mb-3">
+                                            <span><i class="fa-solid fa-f"></i></span>
+                                            <input type="text" class="form-control" id="first_name" name="first_name" placeholder="ชื่อ" required>
+                                        
+                                    </div>
+
+                                    <div class="input-signup mb-3">
+                                        <span><i class="fa-solid fa-l"></i></span>
+                                        <input type="text" class="form-control" id="last_name" name="last_name"
+                                            placeholder="นามสกุล" required>
+                                    </div>
+
+                                    <div class="input-signup mb-3">
+                                        <span><i class="fas fa-envelope"></i></span>
+                                        <input type="email" class="form-control" id="email" name="email"
+                                            placeholder="อีเมลล์" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                                    </div>
+
+                                    <div class="input-signup mb-3">
+                                        <span><i class="fas fa-lock"></i></span>
+                                        <input type="password" class="form-control" id="password" name="password"
+                                            placeholder="รหัสผ่าน" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                                    </div>
+                                    <!-- <small>ที่อยู่อีเมลจะไม่ถูกเปิดเผยต่อสาธารณะ และจะใช้เฉพาะในกรณีที่คุณต้องการรับรหัสผ่านใหม่</small> -->
+
+                                    
+                                    <div class="d-grid gap-2">
+                                        <button type="submit" class="btn btn-primary btn-block">สมัคร PARCEL</button>
+                                        <a class="btn btn-light btn-signin" href="{% url 'login' %}">เข้าสู่ระบบที่นี่</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'footer.html' %}
+{% endblock content %}

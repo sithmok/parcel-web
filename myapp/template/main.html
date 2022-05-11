@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} PARCEL {% endblock %}
+
+{% block content %}
+
+<section style="background-color: #ffffff;">
+
+
+
+  <div class="container col-xxl-10 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-3">
+      <div class="col-10 col-sm-10 col-lg-6 mx-auto main-header-image" data-aos="zoom-in" data-aos-duration="2500">
+        <img src="/media/static_web/workspace.png" class="d-block mx-auto img-fluid" alt="Bootstrap Themes" width="400" height="400" loading="lazy">
+      </div>
+      <div class="col-lg-6 main-header-text">
+        <h1 class=" fw-bold mb-3 text-md-start text-center lh-sm" data-aos="fade-right" data-aos-duration="1500">ร่วมแบ่งปันประสบการณ์ของคุณให้ทุกคนได้รับรู้</h1>
+        
+        <p data-aos="fade-right" data-aos-duration="2000" class="text-grey lh-lg">เว็บไซต์ซึ่งเป็นแหล่งรวบรวม แบ่งปันและส่งต่อประสบการณ์ในการฝึกงานของตนเอง ให้กับผู้คนที่กำลังให้ความสนใจหรือมีความต้องการที่จะหาที่ฝึกงานเพื่อฝึกฝนตนเองได้รับรู้ เพื่อเป็นแนวทางและตัวช่วยในการตัดสินใจในการเลือกเส้นทางและสายงานสำหรับใครหลายคน</p>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-start" data-aos="fade-right" data-aos-duration="2500">
+          <button type="button" class="btn btn-primary px-4 me-md-2 mt-2">เริ่มเลย</button>
+          <!-- <button type="button" class="btn btn-outline-orange btn-lg px-4">Default</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- <a href="http://office.nu.ac.th/meeting/pdf/is55.pdf" target="_blank">ดาวโหลดเบยยยยย</a> -->
+
+<div class="container px-4 py-5" id="hanging-icons" style="background-color: #F8F9FA;">
+  <h2 class="pb-2 border-bottom text-md-start text-center" data-aos="fade-right" data-aos-duration="1500">ระบบการใช้งาน</h2>
+  <div class="row g-4 pt-5 row-cols-1 row-cols-lg-3">
+    <div class="col d-flex align-items-start" data-aos="zoom-in" data-aos-duration="2000">
+      <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+        <lord-icon
+          class="align-self-center"
+          src="https://cdn.lordicon.com/auvicynv.json"
+          trigger="hover"
+          colors="primary:#0066FF"
+          style="width:3em; height:3em;">
+        </lord-icon>
+      </div>
+      <div>
+        <h2>แบ่งปันเนื้อหา</h2>
+        <p>ลงเนื้อหาประสบการณ์การฝึกงานของคุณเองลงบนเว็บไซต์ เพื่อเป็นแนวทางและตัวช่วยการตัดสินใจในการเลือกเส้นทางและสายงานของผู้เข้าใช้งานท่านอื่นๆ</p>
+        
+      </div>
+    </div>
+    <div class="col d-flex align-items-start" data-aos="zoom-in" data-aos-duration="2000">
+      <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+        <lord-icon
+              class="align-self-center"
+              src="https://cdn.lordicon.com/ofqzcdla.json"
+              trigger="hover"
+              colors="primary:#0066FF"
+              style="width:3em; height:3em;">
+          </lord-icon>
+      </div>
+      <div>
+        <h2>อ่านเนื้อหา</h2>
+        <p>อ่านเนื้อหาการแบ่งปันประสบการณ์การฝึกงานจากผู้เข้าใช้งานท่านอื่นๆ เพื่อเป็นแนวทางและตัวช่วยการตัดสินใจในการเลือกเส้นทางและสายงานของคุณเอง</p>
+        
+      </div>
+    </div>
+    <div class="col d-flex align-items-start" data-aos="zoom-in" data-aos-duration="2000">
+      <div class="icon-square bg-light text-dark flex-shrink-0 me-3">
+        <lord-icon
+              class="align-self-center"
+              src="https://cdn.lordicon.com/dklbhvrt.json"
+              trigger="hover"
+              colors="primary:#0066FF"
+              style="width:3em; height:3em;">
+          </lord-icon>
+      </div>
+      <div>
+        <h2>ข้อมูลติดต่อ</h2>
+        <p>ในกรณีที่สนใจและอยากทราบข้อมูลอย่างละเอียด สามารถกดเข้าดูช่องทางในการติดต่อของผู้ลงเนื้อหาผ่านทางโปรไฟล์ เพื่อใช้ในการพูดคุยสอบถามข้อมูลเพิ่มเติมนอกเหนือจากที่ลงไว้ได้</p>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<section class="">
+  <div class="container-md py-3">
+
+    <h3 class="mb-2">เนื้อหาแนะนำ</h3>
+
+    <div class="row">
+      {% for p in mostlike %}
+      {% if p.active %}
+      <div class="col-sm-6 col-md-6 col-lg-4 col-xxl-3 ">
+          <a href="{% url 'article-detail' p.id %}" style="text-decoration: none;">
+          <div class="card mb-3 shadow-sm" style="border-radius: 10px; overflow: hidden;">
+              <div class="card-responsive-flex">
+                      <div class="card-body-thumbnail">
+                          <img src="{{ p.thumbnail.url }}" class="card-thumbnail">
+                      </div>
+                      
+                  
+                      <div class="card-body py-1">
+                          <div class="p-body-inside">
+                              <p class="theme-color-2 p-header">{{ p.title }}</p>
+                              <div class="p-body-1">
+                                {% if p.introduce %}
+                                <p>{{p.introduce|safe}}</p>
+                                {% else %}
+                                <p class="text-grey">ไม่มีการลงเนื้อหาในหัวข้อดังกล่าว</p>
+                                {% endif %}
+                              </div>
+                          </div>
+                          <div class="row">
+                              <p class="theme-color-2 mt-1">{{ p.position }}</p>
+                              <div class="col-7 pe-0">
+                                  <p class="card-text text-grey">แนะนำ : {{p.rating}}</p>
+                              </div>
+                              <div class="col-5 ps-0">
+                                {% if p.money and p.money_type %}
+                                <p class="card-tex text-end text-grey">{{p.money}}/{{p.money_type}}</p>
+                                {% else %}
+                                <p class="card-text text-end text-grey">
+                                  <i class="far fa-money-bill-alt pr-2" style="color: #06F;"></i> : ไม่มี
+                                </p>
+                                {% endif %}
+                              </div>
+                          </div>
+                      </div>
+
+              </div>
+              <div class="card-footer border-top py-1" style="background: inherit; border-color: inherit;">
+
+                  <div class="row">
+                      <div class="col-4">
+                          <p class="theme-color-1">{{ p.total_likes }} ถูกใจ
+                          </p>
+                      </div>
+                      <div class="col-8">
+                          <div class="text-end">
+                              <p class="theme-color-1">{{ p.post_date|date:"d M Y"}}</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          </a>
+      </div>
+      {% endif %}
+      {% endfor %}
+  </div>
+
+  </div>
+</section>
+
+
+
+
+<section class="">
+  <div class="container-md py-3">
+
+    <h3 class="mb-2">เนื้อหาปัจจุบัน</h3>
+
+    <div class="row">
+      {% for p in post %}
+      {% if p.active %}
+      <div class="col-sm-6 col-md-6 col-lg-4 col-xxl-3 ">
+          <a href="{% url 'article-detail' p.id %}" style="text-decoration: none;">
+          <div class="card mb-3 shadow-sm" style="border-radius: 10px; overflow: hidden;">
+              <div class="card-responsive-flex">
+                      <div class="card-body-thumbnail">
+                          <img src="{{ p.thumbnail.url }}" class="card-thumbnail">
+                      </div>
+                      
+                  
+                      <div class="card-body py-1">
+                          <div class="p-body-inside">
+                              <p class="theme-color-2 p-header">{{ p.title }}</p>
+                              <div class="p-body-2">
+                                {% if p.introduce %}
+                                <p>{{p.introduce|safe}}</p>
+                                {% else %}
+                                <p class="text-grey">ไม่มีการลงเนื้อหาในหัวข้อดังกล่าว</p>
+                                {% endif %}
+                              </div>
+                          </div>
+                          <div class="row">
+                              <p class="theme-color-2 mt-1">{{ p.position }}</p>
+                              <div class="col-7 pe-0">
+                                  <p class="card-text text-grey">แนะนำ : {{p.rating}}</p>
+                              </div> 
+                              <div class="col-5 ps-0">
+                                {% if p.money and p.money_type %}
+                                <p class="card-text text-end text-grey">{{p.money}}/{{p.money_type}}</p>
+                                {% else %}
+                                <p class="card-text text-end text-grey">
+                                  <i class="far fa-money-bill-alt pr-2" style="color: #06F;"></i> : ไม่มี
+                                </p>
+                                {% endif %}
+                              </div>
+                          </div>
+                      </div>
+
+              </div>
+              <div class="card-footer border-top py-1" style="background: inherit; border-color: inherit;">
+
+                  <div class="row">
+                      <div class="col-4">
+                          <p class="theme-color-1">{{ p.total_likes }} ถูกใจ
+                          </p>
+                      </div>
+                      <div class="col-8">
+                          <div class="text-end">
+                              <p class="theme-color-1">{{ p.post_date|date:"d M Y"}}</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          </a>
+      </div>
+      {% endif %}
+      {% endfor %}
+  </div>
+
+  </div>
+</section>
+</section>
+<script src="{% static "js/addclass.js" %}"></script>
+{% endblock content %}

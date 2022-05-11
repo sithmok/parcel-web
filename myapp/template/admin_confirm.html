@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} แอดมินโพสต์ {% endblock %}
+{% block content %}
+
+
+<section class="py-5">
+
+    <div class="container-lg light-style flex-grow-1 container-p-y">
+
+        <div class="card overflow-hidden px-3 shadow-sm">
+
+            <div class="row no-gutters row-bordered row-border-light">
+                <div class="col-md-3 pt-0 navbar-expand-lg px-0">
+                    {% include 'admin_base.html' %}
+                </div>
+                <div class="col-md-9 px-0">
+                    <div class="tab-content">
+                        <div class="tab-pane fade active show" id="account-general">
+
+                            <div class="card-body pb-0">
+                                <h4 class="align-bottom mt-2 mb-0">เนื้อหารอการอนุมัติ</h4>
+                                <hr>
+                            </div>
+
+                            <div class="card-body">
+                                
+                                <form method="POST" enctype="multipart/form-data">
+
+                                    {% csrf_token %}
+                                    {{ form.media }}
+                  
+                                    
+                                    <div id="toolbar">
+                                      <button class="btn btn-danger" type="submit"> ลบทั้งหมด </button>
+                                    </div>
+                  
+                                    <table data-toggle="table" class="table" data-click-to-select="true"  data-search="true" data-pagination="true" data-page-list="[10, 20, 30, all]" data-toolbar="#toolbar" style="width:100%">
+                                      
+                                      <thead>
+                                        <tr>
+                                          <th data-width="30" ><input type="checkbox" onClick='toggle1(this)' /></th>
+                                          <th scope="col" data-sortable="true">ชื่อบริษัท</th>
+                                          <th scope="col" data-sortable="true">ตำแหน่ง</th>
+                                          <th scope="col" data-sortable="true">ผู้สร้าง</th>
+                                          <th scope="col" data-sortable="true">วันที่</th>
+                                          <th scope="col" class="text-center">อนุมัติ</th>
+                                          <th scope="col" data-width="30" class="text-center">ดู</th>
+                                          <th scope="col" data-width="30" class="text-center">ลบ</th>
+                                        </tr>
+                                      </thead>
+                  
+                                      <tbody>
+                                        {% for p in post %}
+
+                                            {% if p.active %}
+
+                                            {% else %}
+                                            <tr>
+                                            <th style="padding: 12px;"><input type="checkbox" name="check1[]" value="{{p.pk}}"></th>
+                                            <td>{{p.title}}</td>
+                                            <td>{{p.position}}</td>
+                                            <td>{{p.createBy.user.first_name}} {{p.createBy.user.last_name}}</td>
+                                            <td>{{p.post_date|date:"d M Y"}}</td>
+                                            <td><a href="{% url 'updatePostStatus' p.id 'active' %}" class="btn btn-outline-primary btn-block">อนุมัติ</a></td>
+                                            <td><a href="{% url 'article-detail' p.id %}" target="_blank" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></a></td>
+                                            <td><a href="/admin-delete-post/{{p.id}}/" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+
+                                            {% endif %}
+
+                                        {% endfor %}
+                                      </tbody>
+                  
+                                    </table>
+                                  </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="{% static "js/checkboxAll.js" %}"></script>
+
+{% endblock content %}

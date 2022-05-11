@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %} Delete post {% endblock %}
+
+{% block content %}
+
+<div class="container-lg"> 
+    <div class="row justify-content-center">
+        <div class="col-xxl-6 col-lg-8 col-md-9 col-sm-10 col-12 mb-3 mt-5">
+            <div class="card py-3 px-3">
+                <h3 class="text-center theme-color-3">ยืนยันการลบเนื้อหา</h3>
+                <hr class="">
+
+                <img src="{{ post.thumbnail.url }}" alt="" class="card-img-top rounded-3 mx-auto d-block" style="width: 70%; max-height: 300px;">
+                <h3 class="m-0 px-3 text-center my-2 text-primary">{{ post.title }}</h3>
+                <p class="text-center m-0">ทำการยืนยันเพื่อลบเนื้อหาของคุณ</p>
+                <hr class="mb-0">
+                <div class="d-flex justify-content-end mt-2">
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary mx-2">ยืนยัน</button>
+                        <button type="submit" class="btn btn-light"><a class="text-dark text-decoration-none" href="/profile/{{user.profile.username}}">ยกเลิก</a></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

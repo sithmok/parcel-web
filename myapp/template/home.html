@@ -1,0 +1,295 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} PARCEL {% endblock %}
+
+{% block content %}
+
+<div class="container-md mt-5">
+    <div class="homepage-bg"></div>
+    <div class="row">
+        <div class="col-xxl-10 col-lg-10 col-md-12 col-sm-12 mx-auto">
+            <div class="card px-3 py-3 shadow-sm" style="border-radius: 10px;">
+                <h3 class="text-center">ค้นหาประสบการณ์ที่คุณสนใจ</h3>
+                <form method="GET" action=".">
+                    <div class="row mb-1">
+                        <div class="col-xxl-4 col-lg-4 col-md-4 col-sm-12">
+                            <label for="form-label"><p>บริษัท</p></label>
+                            <div class="input-group">
+                                <input type="search" name="company_contains" class="form-control"
+                                    -label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+                                    placeholder="ชื่อบริษัท">
+                            </div>
+                        </div>
+                        <div class="col-xxl-4 col-lg-4 col-md-4 col-sm-12">
+                            <label for="form-label"><p>ตำแหน่ง</p></label>
+                            <div class="input-group">
+                                <input type="search" name="position_contains" class="form-control"
+                                    -label="Sizing example input" aria-describedby="inputGroup-sizing-default"
+                                    placeholder="ชื่อตำแหน่ง">
+                            </div>
+                        </div>
+                        <div class="col-xxl-4 col-lg-4 col-md-4 col-sm-12">
+                            <label for="form-label"><p>ค่าตอบแทน</p></label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" placeholder="น้อยสุด" aria-label="Recipient's username" aria-describedby="button-addon2" name="money_min" min="0" max="100000">
+                                <input type="number" class="form-control" placeholder="มากสุด" aria-label="Recipient's username" aria-describedby="button-addon2" name="money_max" min="0" max="100000">
+                                <select class="form-select" id="money_type" aria-label="Default select example"
+                                    name="money_type">
+                                    <option selected>เลือก...</option>
+                                    <option value="วัน">วัน</option>
+                                    <option value="สัปดาห์">สัปดาห์</option>
+                                    <option value="เดือน">เดือน</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-xxl-4 col-lg-4 col-md-4 col-sm-12 text-center filter-button mt-2">
+                            <button class="btn btn-outline-primary btn-sm " type="button" onclick="open_filterlist()"><i class="fa-solid fa-arrow-down-wide-short"></i> ตัวกรอง (3)</button>
+                        </div>
+
+                    
+
+                        <div id="filter-list" class="open-filterlist">
+                            <div class="row mt-1">
+                                
+                                <div class="col-xxl-4 col-lg-4 col-md-4 col-sm-12">
+                                    <label for="form-label"><p>จังหวัด</p></label>
+                                    <div class="input-group">
+                                        <select class="form-select" id="id_exact" aria-label="Default select example"
+                                            name="id_exact">
+                                            <option selected>เลือก...</option>
+                                            {% for p in prov %}
+                                            <option value="{{ p.id }}">{{ p }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-xxl-4 col-lg-4 col-md-4 col-sm-12">
+                                    <label for="form-label"><p>ประเภท</p></label>
+                                    <div class="input-group">
+                                        <select class="form-select" id="intern_type" aria-label="Default select example"
+                                            name="intern_type">
+                                            <option selected>เลือก...</option>
+                                            <option value="ปกติ">ปกติ</option>
+                                            <option value="สหกิจ">สหกิจ</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-xxl-4 col-lg-4 col-md-4 col-sm-12">
+                                    <label for="form-label"><p>แนะนำ</p></label>
+                                    <div class="input-group">
+                                        <select class="form-select" id="rating" aria-label="Default select example"
+                                            name="rating">
+                                            <option selected>เลือก...</option>
+                                            <option value="น้อยมาก">น้อยมาก</option>
+                                            <option value="น้อย">น้อย</option>
+                                            <option value="ปานกลาง">ปานกลาง</option>
+                                            <option value="มาก">มาก</option>
+                                            <option value="มากที่สุด">มากที่สุด</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    
+
+                        
+
+                   
+
+                    <!-- <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-orange"><i class="fa-solid fa-magnifying-glass"></i> ค้นหา</button>
+                    </div> -->
+
+                    <div class="row mt-2">
+                        <div class="col-6 d-grid">
+                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i> ค้นหา</button>
+                        </div>
+                        <div class="col-6 d-grid">
+                            <!-- <button type="submit" class="btn btn-orange"><i class="fa-solid fa-magnifying-glass"></i> ค้นหา</button> -->
+                            <a href="{% url 'home' %}" class="btn btn-outline-primary"><i class="fa-solid fa-arrow-rotate-right"></i> ล้าง</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<section>
+
+    <div class="container-md">
+
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+
+        
+
+        <div class="row">
+            <div class="col-12 pt-4">
+                <h4 class="theme-color-1">เนื้อหาแนะนำ</h4>
+            </div>
+            {% for p in mostlike %}
+            {% if p.active %}
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xxl-3 ">
+                <a href="{% url 'article-detail' p.id %}" style="text-decoration: none;">
+                <div class="card mb-3" style="border-radius: 10px; overflow: hidden;">
+                    <div class="card-responsive-flex">
+                            <div class="card-body-thumbnail">
+                                <img src="{{ p.thumbnail.url }}" class="card-thumbnail">
+                            </div>
+                            
+                        
+                            <div class="card-body py-1">
+                                <div class="p-body-inside">
+                                    <p class="theme-color-2 p-header">{{ p.title }}</p>
+                                    <div class="p-body-1">
+                                        {% if p.introduce %}
+                                        <p>{{p.introduce|safe}}</p>
+                                        {% else %}
+                                        <p class="text-grey">ไม่มีการลงเนื้อหาในหัวข้อดังกล่าว</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <p class="theme-color-2 mt-1">{{ p.position }}</p>
+                                    <div class="col-7 pe-0">
+                                        <p class="card-text text-grey">แนะนำ : {{p.rating}}</p>
+                                    </div>
+                                    <div class="col-5 ps-0">
+                                        {% if p.money and p.money_type %}
+                                        <p class="card-text text-end text-grey">{{p.money}}/{{p.money_type}}</p>
+                                        {% else %}
+                                        <p class="card-text text-end text-grey">
+                                            <i class="far fa-money-bill-alt pr-2" style="color: #06F;"></i> : ไม่มี
+                                        </p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
+                    <div class="card-footer border-top py-1" style="background: inherit; border-color: inherit;">
+
+                        <div class="row">
+                            <div class="col-4">
+                                <p class="theme-color-1">{{ p.total_likes }} ถูกใจ
+                                </p>
+                            </div>
+                            <div class="col-8">
+                                <div class="text-end">
+                                    <p class="theme-color-1">{{ p.post_date|date:"d M Y"}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </a>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+
+        
+
+
+        
+
+        <div class="row">
+            <div class="col-12 pt-3">
+                <h4 class="theme-color-1">เนื้อหาปัจจุบัน</h4>
+            </div>
+            {% for p in post %}
+            {% if p.active %}
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xxl-3 ">
+                <a href="{% url 'article-detail' p.id %}" style="text-decoration: none;">
+                <div class="card mb-3" style="border-radius: 10px; overflow: hidden;">
+                    <div class="card-responsive-flex">
+                            <div class="card-body-thumbnail">
+                                <img src="{{ p.thumbnail.url }}" class="card-thumbnail">
+                            </div>
+                            
+                        
+                            <div class="card-body py-1">
+                                <div class="p-body-inside overflow-hidden">
+                                    <p class="theme-color-2 p-header">{{ p.title }}</p>
+                                    <div class="p-body-2">
+                                        {% if p.introduce %}
+                                        <p>{{p.introduce|safe}}</p>
+                                        {% else %}
+                                        <p class="text-grey">ไม่มีการลงเนื้อหาในหัวข้อดังกล่าว</p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <p class="theme-color-2 mt-1">{{ p.position }}</p>
+                                    <div class="col-7 pe-0">
+                                        <p class="card-text text-grey">แนะนำ : {{p.rating}}</p>
+                                    </div>
+                                    <div class="col-5 ps-0">
+                                        {% if p.money and p.money_type %}
+                                        <p class="card-text text-end text-grey">{{p.money}}/{{p.money_type}}</p>
+                                        {% else %}
+                                        <p class="card-text text-end text-grey">
+                                            <i class="far fa-money-bill-alt pr-2" style="color: #06F;"></i> : ไม่มี
+                                        </p>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
+                    <div class="card-footer border-top py-1" style="background: inherit; border-color: inherit;">
+
+                        <div class="row">
+                            <div class="col-4">
+                                <p class="theme-color-1">{{ p.total_likes }} ถูกใจ
+                                </p>
+                            </div>
+                            <div class="col-8">
+                                <div class="text-end">
+                                    <p class="theme-color-1">{{ p.post_date|date:"d M Y"}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </a>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            {% include 'pagination.html' %}
+        </div>
+    </div>
+
+</section>
+
+<script>
+    function open_filterlist() {
+       var element = document.getElementById("filter-list");
+       element.classList.toggle("open-filterlist");
+    }
+</script>
+
+<script src="{% static "js/addclass.js" %}"></script>
+{% endblock content %}

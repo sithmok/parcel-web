@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} แก้ไขโปรไฟล์ {% endblock %}
+{% block content %}
+
+<section class="py-5" style="background-color: #ffffff;">
+    <div class="container light-style flex-grow-1 container-p-y">
+
+        {% if status %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>{{status}}</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                </div>
+                                {% endif %}
+
+        <div class="card overflow-hidden px-3">
+
+            <div class="row no-gutters row-bordered row-border-light">
+                <div class="col-md-3 pt-0 navbar-expand-lg px-0">
+                    <div class="list-group list-group-flush account-settings-links">
+                        <a class="list-group-item list-group-item-action border-bottom active text-center text-md-start" data-toggle="list"
+                            href="#account-general">แก้ไขโปรไฟล์</a>
+ 
+                    </div>
+                </div>
+                <div class="col-md-9 px-0">
+                    <div class="tab-content">
+                        <div class="tab-pane fade active show" id="account-general">
+                            <div class="card-body pb-0 pt-2">
+                                <h5 class="align-bottom mt-2 mb-0">แก้ไขโปรไฟล์</h5>
+                                <hr class="mt-2">
+                            </div>
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ form.media }}
+
+                            
+                                <div class="card-body media align-items-center py-0 text-md-start text-center">
+
+                                    <!-- {% if user.profile.photo %} -->
+                                    <img src="{{ user.profile.photo.url }}" class="img-fluid" id="file-ip-1-preview" style="width: 180px; height: 180px; border-radius: 10px;">
+                                    <!-- {% else %}
+                                    <div class="profile-logo">
+                                        <p id="alphabetLogo">{{ user.first_name.0 | capfirst }}</p>
+                                        <img class="profilePic beforeUpload rounded-circle" id="file-ip-1-preview" width="246px" height="246px">
+                                    </div>
+                                    {% endif %} -->
+
+                                    
+                                </div>
+
+                                <div class="card-body">
+
+                                    <div class="form-group">
+                                        <label class="form-label m-0">อัพโหลดรูปภาพ</label>
+                                        <input type="file" class="form-control" id="file-ip-1" name="photo" placeholder="รูปภาพโปรไฟล์" accept="image/*" onchange="showPreview(event);">
+                                    </div>
+
+                                    <div class="form-group mt-2">
+                                        <label class="form-label m-0">username</label>
+                                        <input type="text" class="form-control" id="user_name" name="user_name"
+                                            placeholder="username" value="{{user.profile.username}}">
+                                    </div>
+
+                                    <div class="form-group mt-2">
+                                        
+                                        <div class="row">
+                                            <div class="col-sm-6 col-12">
+                                                <label class="form-label m-0">ชื่อ</label>
+                                                <input type="text" class="form-control" id="first_name"
+                                                    name="first_name" placeholder="ชื่อ" value="{{user.first_name}}">
+                                            </div>
+                                            <div class="col-sm-6 col-12">
+                                                <label class="form-label m-0">นามสกุล</label>
+                                                <input type="text" class="form-control" id="last_name" name="last_name"
+                                                    placeholder="นามสกุล" value="{{user.last_name}}">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="form-group">
+                                        <label class="form-label">อีเมลล์</label>
+                                        <input type="text" class="form-control mb-1" value="{{p.user.email}}" disabled>
+                                    </div> -->
+                                    
+                                    <div class="form-group mt-2">
+                                        <label class="form-label m-0">ประวัติ</label>
+                                        <textarea class="form-control" rows="5" id="bio"
+                                            name="bio">{{user.profile.bio}}</textarea>
+                                    </div>
+                                    
+                                    <div class="form-group mt-2">
+                                        <label class="form-label m-0">เบอร์โทรศัพท์</label>
+                                        <input type="text" class="form-control" id="tel" name="tel"
+                                            value="{{user.profile.tel}}">
+                                    </div>
+
+                                    <div class="form-group mt-2">
+                                        <label class="form-label m-0">Facebook</label>
+                                        <input type="text" class="form-control" id="facebook" name="facebook"
+                                            value="{{user.profile.facebook}}">
+                                    </div>
+
+                                    <div class="form-group mt-2">
+                                        <label class="form-label m-0">Twitter</label>
+                                        <input type="text" class="form-control" id="twitter" name="twitter"
+                                            value="{{user.profile.twitter}}">
+                                    </div>
+                                    
+                                    <div class="form-group mt-2">
+                                        <label class="form-label m-0">Instagram</label>
+                                        <input type="text" class="form-control" id="instagram" name="instagram"
+                                            value="{{user.profile.instagram}}">
+                                    </div>
+
+                                    <div class="form-group mt-2">
+                                        <label class="form-label m-0">Website</label>
+                                        <input type="text" class="form-control" id="website" name="website"
+                                            value="{{user.profile.website}}">
+                                    </div>
+
+                                    <div class="form-group mt-2">
+                                        <label class="form-label m-0">Github</label>
+                                        <input type="text" class="form-control" id="github" name="github"
+                                            value="{{user.profile.github}}">
+                                    </div>
+
+                                    <div class="d-flex justify-content-end mt-2">
+                                        <button type="submit" class="btn btn-primary mx-2">ยืนยัน</button>
+                                        <button type="submit" class="btn btn-light"><a style="text-decoration: none;" class="text-dark" href="/profile/{{user.profile.username}}">ยกเลิก</a></button>
+                                    </div>
+                                    
+
+                                </div>
+
+
+                            </form>
+
+                        </div>
+
+                        <div class="tab-pane fade" id="account-info">
+                            <div class="card-body pb-2">
+
+
+                                <!-- <div class="form-group">
+                                    <label class="form-label">Birthday</label>
+                                    <input type="text" class="form-control" value="May 3, 1995">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Country</label>
+                                    <select class="custom-select">
+                                        <option>USA</option>
+                                        <option selected="">Canada</option>
+                                        <option>UK</option>
+                                        <option>Germany</option>
+                                        <option>France</option>
+                                    </select>
+                                </div> -->
+
+
+                            </div>
+                            <hr class="border-light m-0">
+                            <div class="card-body pb-2">
+
+                                <h6 class="mb-4">ติดต่อ</h6>
+                                <div class="form-group">
+                                    <label class="form-label">เบอร์โทรศัพท์</label>
+                                    <input type="text" class="form-control" value="+0 (123) 456 7891" disabled>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">เว็บไซต์</label>
+                                    <input type="text" class="form-control" value="" disabled>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="account-social-links">
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    {% if p.twitter %}
+                                    <label class="form-label">Twitter</label><a href="{{p.twitter}}"><i
+                                            class="fa-solid fa-arrow-up-right-from-square px-2"></i></a>
+                                    <input type="text" class="form-control" value="{{p.twitter}}" disabled>
+                                    {% else %}
+                                    <label class="form-label">Twitter</label>
+                                    <input type="text" class="form-control" value="ไม่มี" disabled>
+                                    {% endif %}
+                                </div>
+
+                                <div class="form-group">
+                                    {% if p.facebook %}
+                                    <label class="form-label">Facebook</label><a href="{{p.facebook}}"><i
+                                            class="fa-solid fa-arrow-up-right-from-square px-2"></i></a>
+                                    <input type="text" class="form-control" value="{{p.facebook}}" disabled>
+                                    {% else %}
+                                    <label class="form-label">Facebook</label>
+                                    <input type="text" class="form-control" value="ไม่มี" disabled>
+                                    {% endif %}
+                                </div>
+
+                                <div class="form-group">
+                                    {% if p.instagram %}
+                                    <label class="form-label">Instagram</label><a href="{{p.instagram}}"><i
+                                            class="fa-solid fa-arrow-up-right-from-square px-2"></i></a>
+                                    <input type="text" class="form-control" value="{{p.instagram}}" disabled>
+                                    {% else %}
+                                    <label class="form-label">Instagram</label>
+                                    <input type="text" class="form-control" value="ไม่มี" disabled>
+                                    {% endif %}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="{% static "js/imagePreview.js" %}"></script>
+
+{% endblock content %}

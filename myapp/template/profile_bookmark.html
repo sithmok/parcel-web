@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} บุ๊คมาร์ค {% endblock %}
+
+{% block content %}
+
+
+<section class="pt-5">
+    <div class="container">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+        <strong>{{message}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+    <div class="container">
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mb-4 mb-md-0 px-3 shadow-sm">
+                    <div class="card-body pb-0 pt-2 ">
+                        <h5 class="align-bottom mt-2 mb-0 text-center text-md-start">บันทึก</h5>
+                        <hr class="mt-2">
+                    </div>
+                    <div class="card-body py-0">
+                        <!-- <div class="row">
+                            {% if mybookmark %}
+                            {% for p in mybookmark %}
+                            <div class="col-md-6 col-lg-4 col-xxl-3 pb-3">
+
+                                <div class="card card-custom shadow-sm bg-white border-white border-0"
+                                    style="border-radius: 20px; overflow: hidden; border: none;">
+                                    <a href="{% url 'article-detail' p.bookmark.id %}" style="text-decoration: none;">
+                                        <div class="card-custom-img"
+                                            style="background-image: url({{ p.bookmark.thumbnail.url }});"></div>
+
+                                        <div class="card-body py-1" style="overflow-y: auto">
+                                            <div class="d-flex justify-content-between">
+                                                <h4 class="card-title theme-color-2">{{ p.bookmark.title }}</h4>
+                                                <a href="delete-bookmark/{{p.id}}/">ลบ</a>
+                                            </div>
+
+                                            {{p.bookmark.body|safe|truncatechars_html:80}}
+
+                                            <p class="mb-1 theme-color-2">{{ p.bookmark.position }}</p>
+
+                                            <div class="row">
+                                                <div class="col-7">
+                                                    <p class="card-text mb-1 text-uppercase theme-color-1">แนะนำ :
+                                                        {{p.bookmark.rating}}</p>
+                                                </div>
+                                                <div class="col-5">
+                                                    <p class="card-text mb-1 text-uppercase text-end theme-color-1"><i
+                                                            class="far fa-money-bill-alt pr-2"
+                                                            style="color: #76b868;"></i>: {{p.bookmark.money}}
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="card-footer border-top py-1"
+                                            style="background: inherit; border-color: inherit;">
+
+                                            <div class="row">
+                                                <div class="col-4">
+                                                    <p class="card-text text-uppercase heading theme-color-1">{{p.bookmark.total_likes }} ถูกใจ</p>
+                                                </div>
+                                                <div class="col-8">
+                                                    <div class="text-end">
+                                                        <p class="card-text text-uppercase heading theme-color-1">{{p.bookmark.post_date}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            {% else %}
+                            <div class="py-5">
+                                <p class="theme-color-2 text-center py-5 m-0">ยังไม่มีการบันทึกเนื้อหาใดๆ</p>
+                            </div>
+                            {% endif %}
+                        </div> -->
+
+
+                        <div class="row">
+                            {% if mybookmark %}
+                            {% for p in mybookmark %}
+                            <div class="col-sm-6 col-md-6 col-lg-4 col-xxl-3 ">
+                                <a href="{% url 'article-detail' p.bookmark.id %}" style="text-decoration: none;">
+                                <div class="card mb-3" style="border-radius: 10px; overflow: hidden;">
+                                    <div class="card-responsive-flex">
+                                            <div class="card-body-thumbnail">
+                                                <img src="{{ p.bookmark.thumbnail.url }}" class="card-thumbnail">
+                                            </div>
+                                            
+                                            <div class="card-body py-1">
+                                                <div class="p-body-inside">
+                                                    <p class="theme-color-2 p-header">{{ p.bookmark.title }}</p>
+                                                    <div class="p-body-2">
+                                                        {{p.bookmark.body|safe}}
+                                                        <!-- |truncatechars_html:80 -->
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <p class="theme-color-2 mt-1">{{ p.bookmark.position }}</p>
+                                                    <div class="col-7 pe-0">
+                                                        <p class="card-text text-uppercase theme-color-1">แนะนำ : {{p.bookmark.rating}}</p>
+                                                    </div>
+                                                    <div class="col-5 ps-0">
+                                                        {% if p.bookmark.money and p.bookmark.money_type %}
+                                                        <p class="card-text text-uppercase text-end theme-color-1">{{p.bookmark.money}}/{{p.bookmark.money_type}}</p>
+                                                        {% else %}
+                                                        <p class="card-text text-uppercase text-end theme-color-1"><i
+                                                            class="far fa-money-bill-alt pr-2" style="color: #06F;"></i> : ไม่มี
+                                                        </p>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                
+                                    </div>
+                                    <div class="card-footer border-top py-1" style="background: inherit; border-color: inherit;">
+                
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <p class="theme-color-1">{{ p.bookmark.total_likes }} ถูกใจ
+                                                </p>
+                                            </div>
+                                            <div class="col-8">
+                                                <div class="text-end">
+                                                    <p class="theme-color-1">{{ p.bookmark.post_date|date:"d M Y"}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </a>
+                            </div>
+                            {% endfor %}
+                            {% else %}
+                            <div class="py-5">
+                                <p class="theme-color-2 text-center py-5 m-0">ยังไม่มีการบันทึกเนื้อหาใดๆ</p>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+</section>
+
+
+{% include 'footer.html' %}
+
+<script src="{% static "js/addclass.js" %}"></script>
+{% endblock content %}

@@ -1,0 +1,362 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} โปรไฟล์ {% endblock %}
+{% block content %}
+{% if user.is_authenticated %}
+{% for p in profile %}
+{% if p.username == url %}
+
+<section class="py-5">
+
+
+    <div class="container-lg light-style flex-grow-1 container-p-y">
+
+        <div class="card overflow-hidden px-3 shadow-sm">
+
+            <div class="row no-gutters row-bordered row-border-light">
+                <div class="col-md-3 pt-0 navbar-expand-lg px-0">
+                    <div class="list-group list-group-flush account-settings-links">
+                        <a class="list-group-item list-group-item-action border-bottom active text-center text-md-start" data-toggle="list"
+                            href="#account-general">ข้อมูลทั่วไป</a>
+                        <a class="list-group-item list-group-item-action border-bottom text-center text-md-start" data-toggle="list"
+                            href="#account-info">ประวัติ</a>
+                        <a class="list-group-item list-group-item-action border-bottom text-center text-md-start" data-toggle="list"
+                            href="#account-social-links">ออนไลน์</a>
+                        <a class="list-group-item list-group-item-action border-bottom text-center text-md-start" data-toggle="list"
+                            href="#account-post">เนื้อหา</a>
+
+                    </div>
+                </div>
+                <div class="col-md-9 px-0">
+                    <div class="tab-content">
+                        <div class="tab-pane fade active show" id="account-general">
+                            <div class="card-body pb-0 pt-2 ">
+                                <h5 class="align-bottom mt-2 mb-0">ข้อมูลทั่วไป</h5>
+                                <hr class="mt-2">
+                            </div>
+
+                            <div class="card-body media align-items-center py-0 text-md-start text-center">
+                                <img src="{{ p.photo.url }}" alt="" class="img-fluid"
+                                    style="width: 180px; height: 180px; border-radius: 10px;">
+
+                            </div>
+
+                            <div class="card-body">
+                                <!-- <div class="form-group">
+                                    <label class="form-label m-0">username</label>
+                                    <input type="text" class="form-control" value="{{p.username}}" disabled>
+                                </div> -->
+                                <div class="form-group">
+                                    <label class="form-label m-0">ชื่อ-นามสกุล</label>
+                                    <input type="text" class="form-control"
+                                        value="{{p.user.first_name}} {{p.user.last_name}}" disabled>
+                                </div>
+                                <div class="form-group mt-2">
+                                    <label class="form-label m-0">อีเมลล์</label>
+                                    <input type="text" class="form-control" value="{{p.user.email}}" disabled>
+                                </div>
+
+                                <!-- {% if currentUser == url %}
+                                    <button class="btn btn-orange">
+                                        <a href="/profile/{{user.profile.username}}/edit" class="text-white text-decoration-none">แก้ไข</a>
+                                    </button>
+                                {% endif %} -->
+                                {% if currentUser == url %}
+                                <div class="d-flex justify-content-end mt-2">
+                                    <button class="btn btn-primary">
+                                        <a href="/profile/{{user.profile.username}}/edit"
+                                            class="text-white text-decoration-none">แก้ไข</a>
+                                    </button>
+                                </div>
+                                {% endif %}
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane fade" id="account-info">
+                            <div class="card-body pb-0 pt-2">
+                                <h5 class="align-bottom mt-2 mb-0">ประวัติ</h5>
+                                <hr class="mt-2">
+                            </div>
+
+                            <div class="card-body py-0">
+
+                                <div class="form-group">
+                                    <label class="form-label m-0">ประวัติ</label>
+                                    <textarea class="form-control" rows="5" disabled>{{p.bio}}</textarea>
+                                </div>
+
+                                <div class="form-group mt-2">
+                                    <label class="form-label m-0">เบอร์โทรศัพท์</label>
+                                    <input type="text" class="form-control" value="{{p.tel}}" disabled>
+                                </div>
+
+                                {% if currentUser == url %}
+                                <div class="d-flex justify-content-end mt-2 mb-3">
+                                    <button class="btn btn-primary">
+                                        <a href="/profile/{{user.profile.username}}/edit"
+                                            class="text-white text-decoration-none">แก้ไข</a>
+                                    </button>
+                                </div>
+                                {% endif %}
+
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="account-social-links">
+                            <div class="card-body pb-0 pt-2">
+                                <h5 class="align-bottom mt-2 mb-0">ออนไลน์</h5>
+                                <hr class="mt-2">
+                            </div>
+
+                            <div class="card-body py-0 mb-3">
+                                <div class="form-group">
+                                    {% if p.twitter %}
+                                    <label class="form-label m-0">Twitter</label><a href="{{p.twitter}}"><i
+                                            class="fa-solid fa-arrow-up-right-from-square px-2 theme-color-2"></i></a>
+                                    <input type="text" class="form-control" value="{{p.twitter}}" disabled>
+                                    {% else %}
+                                    <label class="form-label m-0">Twitter</label>
+                                    <input type="text" class="form-control" value="ไม่มี" disabled>
+                                    {% endif %}
+                                </div>
+
+                                <div class="form-group mt-2">
+                                    {% if p.facebook %}
+                                    <label class="form-label m-0">Facebook</label><a href="{{p.facebook}}" target="_blank"><i
+                                            class="fa-solid fa-arrow-up-right-from-square px-2 theme-color-2"></i></a>
+                                    <input type="text" class="form-control" value="{{p.facebook}}" disabled>
+                                    {% else %}
+                                    <label class="form-label m-0">Facebook</label>
+                                    <input type="text" class="form-control" value="ไม่มี" disabled>
+                                    {% endif %}
+                                </div>
+
+                                <div class="form-group mt-2">
+                                    {% if p.instagram %}
+                                    <label class="form-label m-0">Instagram</label><a href="{{p.instagram}}"><i
+                                            class="fa-solid fa-arrow-up-right-from-square px-2 theme-color-2"></i></a>
+                                    <input type="text" class="form-control" value="{{p.instagram}}" disabled>
+                                    {% else %}
+                                    <label class="form-label m-0">Instagram</label>
+                                    <input type="text" class="form-control" value="ไม่มี" disabled>
+                                    {% endif %}
+                                </div>
+
+                                <div class="form-group mt-2">
+                                    {% if p.facebook %}
+                                    <label class="form-label m-0">Facebook</label><a href="{{p.facebook}}" target="_blank"><i
+                                        class="fa-solid fa-arrow-up-right-from-square px-2 theme-color-2"></i></a>
+                                    <input type="text" class="form-control" value="{{p.facebook}}" disabled>
+                                    {% else %}
+                                    <label class="form-label m-0">Facebook</label>
+                                    <input type="text" class="form-control" value="ไม่มี" disabled>
+                                    {% endif %}
+                                </div>
+
+                                <div class="form-group mt-2">
+                                    {% if p.website %}
+                                    <label class="form-label m-0">Website</label><a href="{{p.website}}" target="_blank"><i
+                                        class="fa-solid fa-arrow-up-right-from-square px-2 theme-color-2"></i></a>
+                                    <input type="text" class="form-control" value="{{p.website}}" disabled>
+                                    {% else %}
+                                    <label class="form-label m-0">Website</label>
+                                    <input type="text" class="form-control" value="ไม่มี" disabled>
+                                    {% endif %}
+                                </div>
+
+
+                                <div class="form-group mt-2">
+                                    {% if p.github %}
+                                    <label class="form-label m-0">Github</label><a href="{{p.github}}" target="_blank"><i
+                                        class="fa-solid fa-arrow-up-right-from-square px-2 theme-color-2"></i></a>
+                                    <input type="text" class="form-control" value="{{p.github}}" disabled>
+                                    {% else %}
+                                    <label class="form-label m-0">Github</label>
+                                    <input type="text" class="form-control" value="ไม่มี" disabled>
+                                    {% endif %}
+                                </div>
+
+                                {% if currentUser == url %}
+                                <div class="d-flex justify-content-end mt-2 mb-3">
+                                    <button class="btn btn-primary">
+                                        <a href="/profile/{{user.profile.username}}/edit"
+                                            class="text-white text-decoration-none">แก้ไข</a>
+                                    </button>
+                                </div>
+                                {% endif %}
+
+                            </div>
+                        </div>
+
+
+                        <div class="tab-pane fade" id="account-post">
+                            <div class="card-body pb-0 pt-2">
+                                <h5 class="align-bottom mt-2 mb-0">เนื้อหา</h5>
+                                <hr class="mt-2">
+                            </div>
+                            <div class="card-body pt-0">
+                                <div class="row">
+                                    {% for p in post %}
+                                        {% if p.createBy.username == url %}
+
+                                                    <!-- <div class="col-xxl-4 col-lg-4 col-md-6 col-sm-12">
+                                                        <div class="card card-custom shadow-sm bg-white border-white border-0"
+                                                            style="border-radius: 20px; overflow: hidden; border: none;">
+                                                            <a href="{% url 'article-detail' p.id %}" style="text-decoration: none;">
+                                                                <div class="card-custom-img"
+                                                                    style="background-image: url({{ p.thumbnail.url }});"></div>
+
+                                                                <div class="card-body py-1" style="overflow-y: auto">
+                                                                    <div class="d-flex justify-content-between">
+                                                                        <h4 class="card-title theme-color-2">{{ p.title }}</h4>
+
+                                                                        <div class="d-flex justify-content-between">
+                                                                            {% if user.profile.id == p.createBy.id %}
+                                                                            <a class="" href="{% url 'update-post' p.id %}">แก้ไข</a> /
+                                                                            <a class="" href="{% url 'delete-post' p.id %}">ลบ</a>
+                                                                            {% endif %}
+                                                                        </div>
+                                                                        
+                                                                    </div>
+
+                                                                    
+                                                                    
+                                                                    
+                                                                    {{p.body|safe|truncatechars_html:100}}
+
+                                                                    <p class="mb-1 theme-color-2">{{ p.position }}</p>
+
+                                                                    <div class="row">
+                                                                        <div class="col-7">
+                                                                            <p class="card-text mb-1 text-uppercase theme-color-1">แนะนำ : {{p.rating}}</p>
+                                                                        </div>
+                                                                        <div class="col-5">
+                                                                            <p
+                                                                                class="card-text mb-1 text-uppercase text-end theme-color-1">
+                                                                                <i class="far fa-money-bill-alt pr-2"
+                                                                                    style="color: #76b868;"></i>: {{p.money}}
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="card-footer border-top py-1"
+                                                                    style="background: inherit; border-color: inherit;">
+                                                                    <div class="row">
+                                                                        <div class="col-4">
+                                                                            <p class="card-text text-uppercase heading theme-color-1">{{ p.total_likes }} ถูกใจ</p>
+                                                                        </div>
+                                                                        <div class="col-8">
+                                                                            <div class="text-end">
+                                                                                <p class="card-text text-uppercase heading theme-color-1">{{ p.post_date}}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                        
+                                                    </div> -->
+
+
+
+                                                    <div class="col-sm-6 col-md-6 col-lg-6 col-xxl-4 ">
+                                                        <a href="{% url 'article-detail' p.id %}" style="text-decoration: none;">
+                                                        <div class="card mb-2" style="border-radius: 10px; overflow: hidden;">
+                                                            <div class="card-responsive-flex">
+                                                                    <div class="card-body-thumbnail">
+                                                                        <img src="{{ p.thumbnail.url }}" class="card-thumbnail">
+                                                                    </div>
+                                                                    
+                                                                
+                                                                    <div class="card-body py-1">
+                                                                        <div class="p-body-inside">
+                                                                            <p class="theme-color-2 p-header">{{ p.title }}</p>
+                                                                            <div class="p-body-2">
+                                                                                {{p.body|safe}}
+                                                                                <!-- |truncatechars_html:80 -->
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            <p class="theme-color-2 mt-1">{{ p.position }}</p>
+                                                                            <div class="col-7 pe-0">
+                                                                                <p class="card-text text-uppercase theme-color-1">แนะนำ : {{p.rating}}</p>
+                                                                            </div>
+                                                                            <div class="col-5 ps-0">
+                                                                                {% if p.money and p.money_type %}
+                                                                                <p class="card-text text-uppercase text-end theme-color-1">{{p.money}}/{{p.money_type}}</p>
+                                                                                {% else %}
+                                                                                <p class="card-text text-uppercase text-end theme-color-1">
+                                                                                    <i class="far fa-money-bill-alt pr-2" style="color: #06F;"></i> : ไม่มี
+                                                                                </p>
+                                                                                {% endif %}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                        
+                                                            </div>
+                                                            <div class="card-footer border-top py-1" style="background: inherit; border-color: inherit;">
+                                        
+                                                                <div class="row">
+                                                                    <div class="col-4">
+                                                                        <p class="theme-color-1">{{ p.total_likes }} ถูกใจ
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="col-8">
+                                                                        <div class="text-end">
+                                                                            <p class="theme-color-1">{{ p.post_date|date:"d M Y"}}</p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </a>
+
+                                                        <div class="d-flex justify-content-between">
+
+                                                            <div class="d-flex align-items-center">
+                                                            {% if p.active %}
+                                                            <p class="text-center">สถานะ : อนุมัติ</p>
+                                                            {% else %}
+                                                            <p class="text-center">สถานะ : รออนุมัติ</p>
+                                                            {% endif %}
+                                                            </div>
+
+                                                            {% if user.profile.id == p.createBy.id %}
+                                                            <div class="d-flex justify-content-between">
+                                                                <a class="btn btn-primary btn-sm" href="{% url 'update-post' p.id %}">แก้ไข</a>
+                                                                <a class="btn btn-danger btn-sm ms-1" href="{% url 'delete-post' p.id %}">ลบ</a>
+                                                            </div>
+                                                            {% endif %}
+                                                        </div>
+
+                                                    </div>
+
+                                                <!-- <div class="py-5">
+                                                    <p class="theme-color-2 text-center py-5 m-0">ยังไม่มีการเพิ่มเนื้อหาใดๆ</p>
+                                                </div> -->
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+</section>
+
+
+{% endif %}
+{% endfor %}
+{% endif %}
+
+<script src="{% static "js/addclass.js" %}"></script>
+{% endblock content %}

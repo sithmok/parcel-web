@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} แก้ไขเนื้อหาของคุณ {% endblock %}
+{% block content %}
+
+<section style="background-color: #ffffff;">
+    <div class="container-lg pt-3 pb-3">
+
+        <div class="row justify-content-center flex-row-reverse ">
+
+            <div class="row justify-content-center px-0">
+                <div class="col-xxl-10 col-lg-8 col-md-9 col-sm-10 col-12 px-0">
+                  {% if messages %}
+                  {% for message in messages %}
+                  <div class="alert alert-{{message.tags}} alert-dismissible fade show mb-3 mx-auto" role="alert">
+                  
+                  <p class="m-0">{{message}}</p>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                  </div>
+                  {% endfor %}
+                  {% endif %}
+                </div>
+            </div>
+
+            <div class="row justify-content-center px-0 mb-3">
+                <div class="col-xxl-10 col-lg-8 col-md-9 col-sm-10 col-12 px-0">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light py-3" style="border-radius: 5px;">
+                        <div class="container-fluid">
+                          <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb m-0">
+                                <li class="breadcrumb-item"><a href="/article/{{ comment.post_id }}" class="link-secondary underline-hover">เนื้อหา</a></li>
+                                <li class="breadcrumb-item"><a href="#" class="link-primary underline-hover">แก้ไขความคิดเห็น</a></li>
+                            </ol>
+                          </nav>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="col-xxl-4 col-lg-8 col-md-9 col-sm-10 col-12 mb-3 px-0">
+                <div class="card py-3 px-3 shadow-sm">
+                    <h3 class="text-center theme-color-3">ข้อตกลงของเรา</h3>
+                    <p>ขอขอบคุณที่คุณร่วมแบ่งปันประสบการณ์ของคุณกับคนอื่นๆ
+                        ประสบการณ์ของคุณมีความหมายและเป็นส่วนสำคัญในการช่วยผู้อื่นในการตัดสินใจเข้าทำงานที่เขารัก</p>
+
+                    <p class="m-0">สิ่งที่คุณสามารถโพสได้</p>
+                    <ul>
+                        <li><p class="m-0">โอกาสที่ได้รับและบรรยากาศในการทำงาน</p></li>
+                        <li><p class="m-0">ข้อมูลที่เป็นประโยชน์ต่อผู้อื่นในการตัดสินใจเข้าทำงานที่บริษัทนั้นๆ</p></li>
+                        <li><p class="m-0">ความรู้สึกดีหรือแย่ระหว่างทำงานที่บริษัท</p></li>
+                        <li><p class="m-0">ความเห็นส่วนตัวเกี่ยวกับบริษัทโดยรวม</p></li>
+                    </ul>
+
+                    <p class="m-0">สิ่งที่คุณไม่ควรโพส</p>
+                    <ul>
+                        <li><p class="m-0">คำหยาบ คำพูดดูหมิ่นผู้อื่น</p></li>
+                        <li><p class="m-0">สิ่งที่แสดงให้เห็นถึงพฤติกรรมไม่เหมาะสม</p></li>
+                        <li><p class="m-0">ข้อมูลที่เป็นความลับของบริษัท</p></li>
+                    </ul>
+
+                    <p class="m-0">ขอขอบคุณที่ร่วมเป็นส่วนหนึ่งในการสร้างพื้นที่เพื่อการหาข้อมูลเกี่ยวกับงานสำหรับทุกคน</p>
+                </div>
+            </div>
+
+            <div class="col-xxl-6 col-lg-8 col-md-9 col-sm-10 col-12 px-0">
+                <div class="card py-3 px-3 shadow-sm">
+                    <h3 class="text-center">แก้ไขความคิดเห็น</h3>
+                    <hr class="mt-0">
+                    <div class="form-group">
+                        <form method="POST" enctype="multipart/form-data">
+
+                            {% csrf_token %}
+
+                            <div class="card-body py-0 pt-2">
+                                <hr class="mt-0 mb-2">
+                                <div class="d-flex flex-start align-items-center">
+                
+                                  <img class="shadow-1-strong me-3"
+                                    src="{{ comment.user.photo.url }}" alt="avatar" width="40"
+                                    height="40" style="border-radius: 5px;"/>
+                
+                                  <div>
+                                    <p class="m-0 text-primary">{{comment.user.user.first_name}} {{comment.user.user.last_name}}</p>
+                                    <p class="m-0 text-grey small">{{comment.stamp|date:"d M Y"}}</p>
+                                  </div>
+                
+                
+                                </div>
+                      
+                                <!-- <p class="mt-2 pb-2 mb-0">{{comment.comment}}</p>
+                                <textarea type="text" class="form-control" name="comment" value="{{comment.comment}}" placeholder="แสดงความคิดเห็น..."> -->
+                                    
+                                <div class="form-group mt-2 pb-2">
+                                    <textarea class="form-control" name="comment" rows="5" placeholder="แสดงความคิดเห็น..." required>{{comment.comment}}</textarea>
+                                </div>
+                                <div class="d-flex justify-content-end mb-2">
+                                    <button type="submit" class="btn btn-primary">ยืนยัน</button>
+                                    <button type="submit" class="btn btn-light ms-2"><a class="text-dark" style="text-decoration: none;" href="/article/{{ comment.post_id }}">ย้อนกลับ</a></button>
+                                </div>
+                                <hr class="mt-0 mb-2">
+                                
+                            </div>
+
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="{% static "js/imagePreview.js" %}"></script>
+
+{% include 'footer.html' %}
+{% endblock content %}
