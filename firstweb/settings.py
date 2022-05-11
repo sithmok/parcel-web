@@ -25,7 +25,7 @@ SECRET_KEY = '3-fa@zr#l3zdk33d%v=vzbdz&rjb7k@)d^&0qfi8$64-v4a5dt'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://parcel-web.herokuapp.com']
+ALLOWED_HOSTS = ['parcel-web.herokuapp.com']
 
 STATICFILES_DIRS = ["/Django Blog 2/firstweb/myapp/static",]
 # Application definition
