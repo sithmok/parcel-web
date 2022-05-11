@@ -118,11 +118,16 @@
                             </div>
 
                             <div class="">
-                                <label for="Intern_type"><p class="m-0">ประเภทการฝึกงาน <span style="color: rgb(255, 0, 0);">*</span></p></label>
+                                <label for="Intern_type"><p class="m-0">เวลาการฝึกงาน <span style="color: rgb(255, 0, 0);">*</span></p></label>
                                 <select class="form-select" name="Intern_type" required>
                                     <option selected value="{{ post.Intern_type }}">{{ post.Intern_type }}</option>
-                                    <option value="ฝึกงาน">ปกติ</option>
-                                    <option value="งานประจำ">สหกิจ</option>
+                                    <!-- <option value="ปกติ">ปกติ</option>
+                                    <option value="สหกิจ">สหกิจ</option> -->
+                                    <option value="1-2 เดือน">1-2 เดือน</option>
+                                    <option value="2-3 เดือน">2-3 เดือน</option>
+                                    <option value="3-4 เดือน">3-4 เดือน</option>
+                                    <option value="4-5 เดือน">4-5 เดือน</option>
+                                    <option value="6 เดือนขึ้นไป">6 เดือนขึ้นไป</option>
                                 </select>
                             </div>
 

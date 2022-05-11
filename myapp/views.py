@@ -413,7 +413,7 @@ def profile_edit(request, username):
     data = Profile.objects.get(user__id=request.user.id)
     context["data"]=data
     if request.method == "POST":
-        new_user_name = request.POST["user_name"]
+        # new_user_name = request.POST["user_name"]
         new_first_name = request.POST["first_name"]
         new_last_name = request.POST["last_name"]
         new_bio = request.POST["bio"]
@@ -429,7 +429,7 @@ def profile_edit(request, username):
         user.last_name = new_last_name
         user.save()
 
-        data.username = new_user_name
+        # data.username = new_user_name
         data.bio = new_bio
         data.tel = new_tel
         data.facebook = new_facebook
@@ -444,7 +444,10 @@ def profile_edit(request, username):
             data.photo = new_photo
             data.save()
 
-        context["status"] = "อัพเดตโปรไฟล์เสร็จสิ้น"
+        # context["status"] = "อัพเดตโปรไฟล์เสร็จสิ้น"
+        messages.success(request,'อัพเดตโปรไฟล์เสร็จสิ้น')
+        return redirect(request.META['HTTP_REFERER'])
+
     return render(request, 'profile_edit.html', context)
 
 def profile_post(request):

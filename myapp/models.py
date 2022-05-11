@@ -43,7 +43,7 @@ class Post (models.Model):
     location3 = models.CharField(max_length=255,null=True, blank=False)
     location4 = models.CharField(max_length=255,null=True, blank=False)
     position = models.CharField(max_length=255,null=True, blank=False)
-    Intern_type = models.CharField(max_length=255,null=False, blank=False, choices=[('ปกติ','ปกติ'),('สหกิจ','สหกิจ')])
+    Intern_type = models.CharField(max_length=255,null=False, blank=False, choices=[('1-2 เดือน','1-2 เดือน'),('2-3 เดือน','2-3 เดือน'),('3-4 เดือน','3-4 เดือน'),('4-5 เดือน','4-5 เดือน'),('6 เดือนขึ้นไป','6 เดือนขึ้นไป')])
     money = models.IntegerField(default=1, blank=True)
     money_type = models.CharField(max_length=255,null=True, blank=True, choices=[('วัน','วัน'),('สัปดาห์','สัปดาห์'),('เดือน','เดือน')])
     introduce = models.CharField(max_length=1000,null=True, blank=False)
