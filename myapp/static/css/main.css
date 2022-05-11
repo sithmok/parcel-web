@@ -749,7 +749,7 @@ nav ul li a:hover::after {
 }
 
 .article-min{
-    min-width: 100px;
+    min-width: 130px;
 }
 
 .like-button:hover i {
@@ -898,9 +898,6 @@ nav ul li a:hover::after {
         height: 200px;
     }
 
-    .article-min{
-        min-width: 80px;
-    }
 
 
   }
