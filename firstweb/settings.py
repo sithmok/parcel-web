@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '3-fa@zr#l3zdk33d%v=vzbdz&rjb7k@)d^&0qfi8$64-v4a5dt'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','localhost','parcel-web.herokuapp.com']
+ALLOWED_HOSTS = ['https://parcel-web.herokuapp.com']
 
 STATICFILES_DIRS = ["/Django Blog 2/firstweb/myapp/static",]
 # Application definition
@@ -142,20 +142,4 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'login'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-# CKEDITOR_CONFIGS = {
-#     'default': {
-#         'toolbar': [
-#                     ['Undo', 'Redo'],
-#                     ["Format", "Bold", "Italic", "Underline", "Strike", "SpellChecker","Blockquote"],
-#                     [ 'TextColor', 'BGColor' ],
-#                     [ 'Smiley' ],
-#                     ['NumberedList', 'BulletedList', "Indent", "Outdent", 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
-#                     ["Maximize"]
-#                    ],
-#         'height': 100,
-#         'width' : '100%',
-#         'extraPlugins' : 'autogrow',
-#         'autoGrow_minHeight' : 100,
-#     }
-    
-# }
+
