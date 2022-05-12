@@ -100,7 +100,10 @@
                                             
                                             <div class="card-body py-1">
                                                 <div class="p-body-inside">
-                                                    <p class="theme-color-2 p-header">{{ p.bookmark.title }}</p>
+                                                    <div class="d-flex justify-content-between">
+                                                        <p class="theme-color-2 p-header">{{ p.bookmark.title }}</p>
+                                                        <a href="delete-bookmark/{{p.id}}/">ลบ</a>
+                                                    </div>
                                                     <div class="p-body-2">
                                                         {% if p.bookmark.introduce %}
                                                         <p>{{p.bookmark.introduce|safe}}</p>
