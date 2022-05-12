@@ -416,6 +416,7 @@ def profile_edit(request, username):
         # new_user_name = request.POST["user_name"]
         new_first_name = request.POST["first_name"]
         new_last_name = request.POST["last_name"]
+        new_email = request.POST["email"]
         new_bio = request.POST["bio"]
         new_tel = request.POST["tel"]
         new_facebook = request.POST["facebook"]
@@ -427,6 +428,7 @@ def profile_edit(request, username):
         user = User.objects.get(id=request.user.id)
         user.first_name = new_first_name
         user.last_name = new_last_name
+        user.email = new_email
         user.save()
 
         # data.username = new_user_name

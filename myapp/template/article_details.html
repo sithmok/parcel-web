@@ -32,7 +32,7 @@
             <div class="d-flex justify-content-between bd-highlight mt-3">
 
                 <div class="d-flex bd-highlight">
-                  <img src="{{ p.createBy.photo.url }}" alt=""  style="min-width: 50px; min-height: 50px; width: 50px; height: 50px; margin-right: 12px; border-radius: 5px;">
+                  <img src="{{ p.createBy.photo.url }}" alt=""  style="min-width: 50px; min-height: 50px; width: 50px; height: 50px; margin-right: 12px; border-radius: 5px; object-fit: cover;">
                   <div class="d-flex flex-column justify-content-around">
                     <p class="m-0 text-primary">{{ p.createBy.user.first_name }} {{ p.createBy.user.last_name }}</p>
                     <p class="m-0 text-grey"> {{p.post_date|date:"d M Y"}}</p>
@@ -84,7 +84,7 @@
               <h5 class="m-0 px-3" style="border-left: 2px solid #06F;">{{ p.title }}</h5>
                 
             </div>
-            <img src="{{ p.thumbnail.url }}" class="shadow-2-strong mx-auto d-block responsive-thumbnail" alt="">
+            <img src="{{ p.thumbnail.url }}" class="shadow-2-strong mx-auto d-block responsive-thumbnail" alt="" style="object-fit: cover;">
           </div>
 
 
@@ -251,7 +251,7 @@
               <div class="carousel-inner position-relative">
                 {% for m in my_otherPostImage %}
                 <div class="carousel-item {% if forloop.first %} active {% endif %}">
-                  <img src="{{ m.image.url }}" class="shadow-2-strong mx-auto d-block responsive-thumbnail" alt="" alt="...">
+                  <img src="{{ m.image.url }}" class="shadow-2-strong mx-auto d-block responsive-thumbnail" alt="" alt="..." style="object-fit: cover;">
                   <div class="position-relative">
                     <p class="text-center my-2">{{m.image_name}} ({{ forloop.counter }} / {{my_otherPostImageCount}})</p>
                   </div>
@@ -283,7 +283,7 @@
                   <div class="d-flex flex-start w-100">
                     <img class="shadow-1-strong"
                       src="{{user.profile.photo.url}}" alt="avatar" width="40"
-                      height="40" style="border-radius: 5px;"/>
+                      height="40" style="border-radius: 5px; object-fit: cover;"/>
                     <div class="form-outline w-100 ms-2">
                       <textarea class="form-control" id="textAreaExample" name="comment" rows="4" placeholder="แสดงความคิดเห็น..." required></textarea>
                     </div>
@@ -306,7 +306,7 @@
 
                   <img class="shadow-1-strong me-3"
                     src="{{ c.user.photo.url }}" alt="avatar" width="40"
-                    height="40" style="border-radius: 5px;"/>
+                    height="40" style="border-radius: 5px; object-fit: cover;"/>
 
                   <div>
                     <p class="m-0 text-primary">{{c.user.user.first_name}} {{c.user.user.last_name}}</p>
@@ -345,7 +345,7 @@
             <div class="card" style="border: none; border-radius: 10px;">
             <div class="bg-image hover-overlay ripple mb-3 mt-3">
               <img src="{{ p.createBy.photo.url }}" class="shadow-1-strong me-2"
-                height="150" width="150" alt="" loading="lazy" style="border-radius: 5px;"/>
+                height="150" width="150" alt="" loading="lazy" style="border-radius: 5px; object-fit: cover;"/>
             </div>
             
             <h5 class="">{{ p.createBy.user.first_name }} {{ p.createBy.user.last_name }}</h5>

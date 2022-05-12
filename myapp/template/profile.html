@@ -36,10 +36,10 @@
                                 <hr class="mt-2">
                             </div>
 
-                            <div class="card-body media align-items-center py-0 text-md-start text-center">
-                                <img src="{{ p.photo.url }}" alt="" class="img-fluid"
-                                    style="width: 180px; height: 180px; border-radius: 10px;">
-
+                            <div class="card-body align-items-center py-0 text-center">
+                                <div class="photo-box text-center" style="width: 180px; height: 180px; border-radius: 10px; ">
+                                    <img src="{{ p.photo.url }}" alt="" style="width: 100%; height: 100%; text-align: center; object-fit: cover; color: transparent; text-indent: 10000px;">
+                                </div>
                             </div>
 
                             <div class="card-body">
@@ -53,7 +53,7 @@
                                         value="{{p.user.first_name}} {{p.user.last_name}}" disabled>
                                 </div>
                                 <div class="form-group mt-2">
-                                    <label class="form-label m-0">อีเมลล์</label>
+                                    <label class="form-label m-0">อีเมล</label>
                                     <input type="text" class="form-control" value="{{p.user.email}}" disabled>
                                 </div>
 
@@ -113,7 +113,7 @@
                             <div class="card-body py-0 mb-3">
                                 <div class="form-group">
                                     {% if p.twitter %}
-                                    <label class="form-label m-0">Twitter</label><a href="{{p.twitter}}"><i
+                                    <label class="form-label m-0">Twitter</label><a href="{{p.twitter}}" target="_blank"><i
                                             class="fa-solid fa-arrow-up-right-from-square px-2 theme-color-2"></i></a>
                                     <input type="text" class="form-control" value="{{p.twitter}}" disabled>
                                     {% else %}
