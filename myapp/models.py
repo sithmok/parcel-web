@@ -12,7 +12,7 @@ class Profile (models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE, blank=True)
     username = models.CharField(max_length=500, null=True, blank=True)
     bio = models.CharField(max_length=500, null=True, blank=True,default='Hi! Im new user')
-    photo = models.ImageField(upload_to="profilePicture",null=True,blank=True,default='profile-default.jpg')
+    photo = models.ImageField(upload_to="profilePicture",null=True,blank=True,default='profilePicture/profile-default.jpg')
     tel = models.CharField(max_length=500, null=False, blank=True)
     facebook = models.CharField(max_length=500, null=False, blank=True)
     twitter = models.CharField(max_length=500, null=False, blank=True)
