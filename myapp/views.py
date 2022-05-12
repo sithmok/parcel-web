@@ -145,15 +145,15 @@ def addpost(request):
         ################
         newPost.save()
 
-        if internworkTitles and internworks:
-                for internwork, internworkTitle,internworkDetail in zip(internworks, internworkTitles,internworkDetails):
-                    if internworkTitle != "":
-                        new_internWorks = internWorks()
-                        new_internWorks.post  = Post.objects.get(title=title)
-                        new_internWorks.work = internwork
-                        new_internWorks.work_name = internworkTitle
-                        new_internWorks.work_detail = internworkDetail
-                        new_internWorks.save()
+        # if internworkTitles and internworks:
+        #         for internwork, internworkTitle,internworkDetail in zip(internworks, internworkTitles,internworkDetails):
+        #             if internworkTitle != "":
+        #                 new_internWorks = internWorks()
+        #                 new_internWorks.post  = Post.objects.get(title=title)
+        #                 new_internWorks.work = internwork
+        #                 new_internWorks.work_name = internworkTitle
+        #                 new_internWorks.work_detail = internworkDetail
+        #                 new_internWorks.save()
 
         if imageTitles and images:
                 for image, imageTitle in zip(images, imageTitles):
@@ -164,8 +164,8 @@ def addpost(request):
                         new_otherPostImage.image_name = imageTitle
                         new_otherPostImage.save()
 
-                messages.success(request,'เพื่มเนื้อหาเสร็จสิ้น รอทางผู้ดูแลอนุมัติเนื้อหาดังกล่าว')
-                return redirect('update-post', newPost.id)
+        messages.success(request,'เพื่มเนื้อหาเสร็จสิ้น รอทางผู้ดูแลอนุมัติเนื้อหาดังกล่าว')
+        return redirect('update-post', newPost.id)
 
     return render(request, 'add_post.html', context)
 

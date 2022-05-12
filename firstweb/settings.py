@@ -26,7 +26,8 @@ SECRET_KEY = '3-fa@zr#l3zdk33d%v=vzbdz&rjb7k@)d^&0qfi8$64-v4a5dt'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['parcel-web.herokuapp.com']
+ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ['parcel-web.herokuapp.com']
 
 STATICFILES_DIRS = ["/Django Blog 2/firstweb/myapp/static",]
 # Application definition
@@ -38,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
+    'cloudinary',
     'myapp',
     'ckeditor',
 ]
@@ -81,9 +84,18 @@ WSGI_APPLICATION = 'firstweb.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
+
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dcs7uaocfrqgfc',
+        'USER': 'nxtuwqiuwbxaac',
+        'PASSWORD': 'fb2a9963df4a9c2fe07d9888e7a4f68cebe567317f6469a6926e7df76f790f63',
+        'HOST': 'ec2-3-229-11-55.compute-1.amazonaws.com',
+        'PORT': '5432'
     }
 }
 
@@ -130,18 +142,26 @@ USE_L10N = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
-
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 LOGIN_URL = 'login'
-# LOGIN_REDIRECT_URL = 'register'
-LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'hhg7dcckn',
+    'API_KEY': '885453344422134',
+    'API_SECRET': '-BUQcDip73Gb_mlWMTdMS3vnyns'
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

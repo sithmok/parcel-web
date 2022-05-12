@@ -322,10 +322,12 @@
                 </div>
       
                 <p class="mt-2 pb-2 mb-0">{{c.comment}}</p>
+                {% if user.id == c.user.user.id %}
                 <div class="d-flex justify-content-end mb-2">
                   <a href="{{p.id}}/edit-comment/{{c.id}}/" class="btn btn-primary btn-sm ms-1">แก้ไข</a>
                   <a href="/delete-comment/{{c.id}}/" class="btn btn-danger btn-sm ms-1">ลบ</a>
                 </div>
+                {% endif %}
                 <hr class="mt-0 mb-2">
                 {% endfor %}
                 

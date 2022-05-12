@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load cloudinary %}
 {% block title %} PARCEL {% endblock %}
 
 {% block content %}
@@ -18,7 +19,7 @@
         
         <p data-aos="fade-right" data-aos-duration="2000" class="text-grey lh-lg">เว็บไซต์ซึ่งเป็นแหล่งรวบรวม แบ่งปันและส่งต่อประสบการณ์ในการฝึกงานของตนเอง ให้กับผู้คนที่กำลังให้ความสนใจหรือมีความต้องการที่จะหาที่ฝึกงานเพื่อฝึกฝนตนเองได้รับรู้ เพื่อเป็นแนวทางและตัวช่วยในการตัดสินใจในการเลือกเส้นทางและสายงานสำหรับใครหลายคน</p>
         <div class="d-grid gap-2 d-md-flex justify-content-md-start" data-aos="fade-right" data-aos-duration="2500">
-          <button type="button" class="btn btn-primary px-4 me-md-2 mt-2">เริ่มเลย</button>
+          <button type="button" class="btn btn-primary px-4 me-md-2 mt-2"><a class="text-white text-decoration-none" href="{% url 'add-post' %}">เริ่มเลย</a></button>
           <!-- <button type="button" class="btn btn-outline-orange btn-lg px-4">Default</button> -->
         </div>
       </div>
