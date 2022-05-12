@@ -27,14 +27,9 @@ def is_valid_queryparam(param):
 
 def home(request):
     post = Post.objects.all()
-    # post = Post.objects.order_by('-post_date')
     prov = Province.objects.all()
     mostlike =  Post.objects.annotate(like_count=Count('likes')).order_by('-like_count')[:4]
-    
-    # mostlike1 =  Post.objects.annotate(like_count=Count('likes')).order_by('-like_count')[:1]
-    # mostlike2 =  Post.objects.annotate(like_count=Count('likes')).order_by('-like_count')[1:2]
-    # mostlike3 =  Post.objects.annotate(like_count=Count('likes')).order_by('-like_count')[2:3]
-
+  
     company_contains_query = request.GET.get('company_contains')
     position_contains_query = request.GET.get('position_contains')
     id_exact_query = request.GET.get('id_exact')
@@ -77,15 +72,13 @@ def home(request):
         post = paginator.page(1)
     except EmptyPage:
         post = paginator.page(paginator.num_pages)
-    
+        
     context = {
         'post': post, 
         'mostlike': mostlike,
-        'prov': prov
-        # 'mostlike1':mostlike1,
-        # 'mostlike2':mostlike2,
-        # 'mostlike3':mostlike3,
+        'prov': prov,
         }
+
     return render(request, 'home.html', context)
 
 def addpost(request):

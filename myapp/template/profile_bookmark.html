@@ -102,8 +102,11 @@
                                                 <div class="p-body-inside">
                                                     <p class="theme-color-2 p-header">{{ p.bookmark.title }}</p>
                                                     <div class="p-body-2">
-                                                        {{p.bookmark.body|safe}}
-                                                        <!-- |truncatechars_html:80 -->
+                                                        {% if p.bookmark.introduce %}
+                                                        <p>{{p.bookmark.introduce|safe}}</p>
+                                                        {% else %}
+                                                        <p class="text-grey">ไม่มีการลงเนื้อหาในหัวข้อดังกล่าว</p>
+                                                        {% endif %}
                                                     </div>
                                                 </div>
                                                 <div class="row">
