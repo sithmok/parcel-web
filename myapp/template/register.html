@@ -33,7 +33,7 @@
                                     {% csrf_token %}
                                     <div class="input-signup mb-3">
                                         <span><i class="fas fa-user"></i></span>
-                                        <input type="text" class="form-control" id="user_name" name="user_name" placeholder="username" required>
+                                        <input type="text" class="form-control" id="user_name" name="user_name" placeholder="username" pattern=".{6,}" title="-ต้องมีความยาวอย่างน้อย 6 ตัว" required>
                                     
                                     </div>
 
@@ -58,7 +58,9 @@
                                     <div class="input-signup mb-3">
                                         <span><i class="fas fa-lock"></i></span>
                                         <input type="password" class="form-control" id="password" name="password"
-                                            placeholder="รหัสผ่าน" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required>
+                                            placeholder="รหัสผ่าน" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="-ตัวอักษรต้องเป็นภาษาอังกฤษเท่านั้น
+                                            -ต้องมีตัวอักษรใหญ่-เล็ก อย่างละตัว
+                                            -ต้องมีความยาวอย่างน้อย 8 ตัว" required>
                                     </div>
                                     <!-- <small>ที่อยู่อีเมลจะไม่ถูกเปิดเผยต่อสาธารณะ และจะใช้เฉพาะในกรณีที่คุณต้องการรับรหัสผ่านใหม่</small> -->
 
