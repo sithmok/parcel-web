@@ -80,7 +80,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="thumbnail"><p class="m-0">รูปปก</p></label>
+                                <label for="thumbnail"><p class="m-0">รูปปก (ไม่รองรับสกุลไฟล์ HEIC)</p></label>
                                 <input type="file" class="form-control" id="file-ip-1" name="thumbnail" accept="image/*" onchange="showPreview(event);">
                             </div>
 
@@ -265,7 +265,7 @@
 
                             
                             <div id="lesson-input" class="mt-2">
-                                <label class="form-label m-0">เพิ่มรูปภาพเพิ่มเติม</label>
+                                <label class="form-label m-0">เพิ่มรูปภาพเพิ่มเติม (ไม่รองรับสกุลไฟล์ HEIC)</label>
                                 <div class="row" id="lesson-input-row">
                                     <!-- {% for i in image %}
                                     <div class="col-5">
@@ -277,7 +277,7 @@
                                     {% endfor %} -->
 
                                     <div class="col-6 left-1 pe-1">
-                                        <input type="file" class="form-control" name="image" id="lessonTitle"/>
+                                        <input type="file" class="form-control" name="image" accept="image/*" id="lessonTitle"/>
                                     </div>
                                     <div class="col-6 right-1 ps-1">
                                         <input type="text" class="form-control" name="imageTitle" id="lessonTitle" placeholder="ชื่อรูปภาพ"/>

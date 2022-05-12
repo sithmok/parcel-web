@@ -59,11 +59,6 @@
                     <form method="POST" enctype="multipart/form-data">
 
                         {% csrf_token %}
-                        {{ form.media }}
-
-                        <!-- {% if status %}
-                        <div class="alert alert-success">{{status}}</div>
-                        {% endif %} -->
 
                         {% if status %}
                         <div class="alert alert-success d-flex align-items-center fade show" role="alert">
@@ -80,7 +75,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="thumbnail"><p class="m-0">รูปปก <span style="color: rgb(255, 0, 0);">*</span></p></label>
+                            <label for="thumbnail"><p class="m-0">รูปปก (ไม่รองรับสกุลไฟล์ HEIC)<span style="color: rgb(255, 0, 0);">*</span></p></label>
                             <input type="file" class="form-control" id="file-ip-1" name="thumbnail" accept="image/*" onchange="showPreview(event);" required>
                         </div>
 
@@ -220,10 +215,10 @@
                         <!-- otherPostImage -->
 
                         <div id="lesson-input" class="mt-2">
-							<label for="form-label"><p class="m-0">รูปภาพเพิ่มเติม</p></label>
+							<label for="form-label"><p class="m-0">รูปภาพเพิ่มเติม (ไม่รองรับสกุลไฟล์ HEIC)</p></label>
                             <div class="row" id="lesson-input-row">
                                 <div class="col-6 left-1 pe-1">
-                                    <input type="file" class="form-control" name="image" id="lessonTitle"/>
+                                    <input type="file" class="form-control" name="image" accept="image/*" id="lessonTitle"/>
                                 </div>
                                 <div class="col-6 right-1 ps-1">
                                     <input type="text" class="form-control" name="imageTitle" id="lessonTitle" placeholder="ชื่อรูปภาพ (1)"/>
