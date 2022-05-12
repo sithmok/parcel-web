@@ -34,7 +34,7 @@
                 <div class="d-flex bd-highlight">
                   <img src="{{ p.createBy.photo.url }}" alt=""  style="min-width: 50px; min-height: 50px; width: 50px; height: 50px; margin-right: 12px; border-radius: 5px; object-fit: cover;">
                   <div class="d-flex flex-column justify-content-around">
-                    <p class="m-0 text-primary">{{ p.createBy.user.first_name }} {{ p.createBy.user.last_name }}</p>
+                    <p class="m-0 text-primary"><a class="link-primary underline-hover" href="/profile/{{p.createBy.username}}">{{ p.createBy.user.first_name }} {{ p.createBy.user.last_name }}</a></p>
                     <p class="m-0 text-grey"> {{p.post_date|date:"d M Y"}}</p>
                   </div>
                 </div>
@@ -309,7 +309,7 @@
                     height="40" style="border-radius: 5px; object-fit: cover;"/>
 
                   <div>
-                    <p class="m-0 text-primary">{{c.user.user.first_name}} {{c.user.user.last_name}}</p>
+                    <p class="m-0 text-primary"><a class="link-primary underline-hover" href="/profile/{{c.user.username}}">{{c.user.user.first_name}} {{c.user.user.last_name}}</a></p>
                     <p class="m-0 text-grey small">{{c.stamp|date:"d M Y"}}</p>
                   </div>
 
