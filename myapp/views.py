@@ -16,7 +16,7 @@ from django.db.models import Q, Count
 
 
 def main(request):
-    post = Post.objects.order_by('-post_date')
+    post = Post.objects.order_by('-post_date')[:4]
     mostlike =  Post.objects.annotate(like_count=Count('likes')).order_by('-like_count')[:4]
     mostlike1 =  Post.objects.annotate(like_count=Count('likes')).order_by('-like_count')[:1]
     context = {'post':post, 'mostlike':mostlike , 'mostlike1':mostlike1}
