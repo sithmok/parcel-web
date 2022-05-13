@@ -95,7 +95,7 @@
               </div>
               <div class="d-flex flex-row bd-highlight">
                 <div class="mb-2 bd-highlight article-min"><p class="m-0 text-grey">ที่ตั้งบริษัท : </p></div>
-                <div class="mb-2 bd-highlight"><p class="m-0 text-grey">{{p.location}} {{p.location2}} {{p.location3}} {{p.location4}}</p></div>
+                <div class="mb-2 bd-highlight"><p class="m-0 text-grey">{% if p.location %} ถนน:{{p.location}} {% else %} ถนน: - {% endif %} {% if p.location2 %} ซอย:{{p.location2}} {% else %} ซอย: - {% endif %} {% if p.location3 %} ตำบล:{{p.location3}} {% else %} ตำบล: - {% endif %} {% if p.location4 %} อำเภอ:{{p.location4}} {% else %} อำเภอ: - {% endif %}</p></div>
               </div>
               <div class="d-flex flex-row bd-highlight">
                 <div class="mb-2 bd-highlight article-min"><p class="m-0 text-grey">ตำแหน่ง : </p></div>
