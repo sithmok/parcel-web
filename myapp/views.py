@@ -484,7 +484,7 @@ def register(request):
             profile.save()
 
             messages.success(request,'สมัครสมาชิกเสร็จสิ้น')
-            return redirect('/register/')
+            return redirect('/login/')
 
         user = authenticate(username=username, password=password)
         login(request, user)
