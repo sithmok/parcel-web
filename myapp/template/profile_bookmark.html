@@ -32,7 +32,7 @@
                             {{ pid|json_script:'pid' }}
                             <div class="col-sm-6 col-md-6 col-lg-4 col-xxl-3 ">
                                 <a href="{% url 'article-detail' p.bookmark.id %}" style="text-decoration: none;">
-                                <div class="card mb-3" style="border-radius: 10px; overflow: hidden;">
+                                <div class="card mb-2" style="border-radius: 10px; overflow: hidden;">
                                     <div class="card-responsive-flex">
                                             <div class="card-body-thumbnail">
                                                 <img src="{{ p.bookmark.thumbnail.url }}" class="card-thumbnail">
@@ -43,11 +43,7 @@
                                                     <div class="d-flex justify-content-between">
                                                         <p class="theme-color-2 p-header">{{ p.bookmark.title }}</p>
                                                         <!-- <a href="delete-bookmark/{{p.id}}/">ลบ</a> -->
-                                                        <span class="modalbtn text-danger" data-pk="{{p.pk}}" data-thumbnail="{{ p.bookmark.thumbnail.url }}" 
-                                                            data-title="{{p.bookmark.title}}"
-                                                            data-toggle="modal" data-target="#quizStartModal">
-                                                            ลบ
-                                                        </span>
+                                                        
                                                     </div>
                                                     <div class="p-body-2">
                                                         {% if p.bookmark.introduce %}
@@ -91,6 +87,14 @@
                                     </div>
                                 </div>
                                 </a>
+
+                                <div class="d-flex justify-content-end mb-3">
+
+                                    <span class="modalbtn btn btn-danger btn-sm ms-1" data-pk="{{p.pk}}" data-thumbnail="{{ p.bookmark.thumbnail.url }}" 
+                                        data-title="{{p.bookmark.title}}" data-toggle="modal" data-target="#quizStartModal">
+                                        ลบ
+                                    </span>
+                                </div>
                             </div>
                             {% endfor %}
                             {% else %}
