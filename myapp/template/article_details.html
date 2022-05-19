@@ -4,6 +4,7 @@
 
 {% block content %}
 {% for p in postdetail %}
+{{ pid|json_script:'pid' }}
 <section>
   <div class="container-lg position-relative">
     
@@ -276,6 +277,7 @@
 
             
             </div>
+
             <form method="POST" enctype="multipart/form-data">
               {% csrf_token %}
               <div class="row d-flex justify-content-center">
@@ -310,7 +312,7 @@
 
                   <div>
                     <p class="m-0 text-primary"><a class="link-primary underline-hover" href="/profile/{{c.user.username}}">{{c.user.user.first_name}} {{c.user.user.last_name}}</a></p>
-                    <p class="m-0 text-grey small">{{c.stamp|date:"d M Y"}}</p>
+                    <p class="m-0 text-grey small">{{c.stamp}}</p>
                   </div>
 
                   <!-- {% if user.id == c.user.user.id %}
@@ -325,7 +327,13 @@
                 {% if user.id == c.user.user.id %}
                 <div class="d-flex justify-content-end mb-2">
                   <a href="{{p.id}}/edit-comment/{{c.id}}/" class="btn btn-primary btn-sm ms-1">แก้ไข</a>
-                  <a href="/delete-comment/{{c.id}}/" class="btn btn-danger btn-sm ms-1">ลบ</a>
+                  <!-- <a href="/delete-comment/{{c.id}}/" class="btn btn-danger btn-sm ms-1">ลบ</a> -->
+
+                  <span class="modalbtn btn btn-danger btn-sm ms-1" data-pk="{{c.pk}}" data-photo="{{ c.user.photo.url }}" data-firstname="{{c.user.user.first_name}}"
+                    data-lastname="{{c.user.user.last_name}}" data-comment="{{c.comment}}" data-stamp="{{c.stamp}}"
+                    data-toggle="modal" data-target="#quizStartModal">
+                    ลบ
+                  </span>
                 </div>
                 {% endif %}
                 <hr class="mt-0 mb-2">
@@ -333,11 +341,30 @@
                 
               </div>
             </form>
+
           </div>
         </div>
       </div>
 
-
+      <!-- Modal -->
+      <div class="modal fade" id="quizStartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+              <h5 class="modal-title text-center" id="exampleModalLabel">ยืนยันการลบความคิดเห็น</h5>
+            </div>
+            <div class="modal-body" id="modal-body-confirm">
+              ...
+            </div>
+            <div class="modal-footer">
+              <a type="button" id="start-button" class="btn btn-primary mx-2" href="">ยืนยัน</a>
+              <button type="button" class="btn btn-light" data-dismiss="modal">ยกเลิก</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
 
       <div class="col-xxl-4 col-lg-8 col-md-9 col-sm-10 col-12 mb-4 mt-4 px-0">
         <section class="sticky-top shadow-sm" style="top: 80px;">
@@ -408,7 +435,7 @@
 <button class="gotoBottom1 btn btn-outline-primary bg-white" onclick="scrollFunction1()" style="z-index: 9999;"><i class="fa-solid fa-arrow-up"></i></button>
 <button class="gotoBottom2 btn btn-outline-primary bg-white" onclick="scrollFunction2()" style="z-index: 9999;"><i class="fa-solid fa-arrow-down"></i></button>
 
-
+<script src="{% static "js/delete-comment-popup.js" %}"></script>
 <script src="{% static "js/article-Detail-AddChild.js" %}"></script>
 <script src="{% static "js/scroll.js" %}"></script>
 

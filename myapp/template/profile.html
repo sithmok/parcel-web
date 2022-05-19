@@ -9,6 +9,16 @@
 
 <section class="py-5">
 
+    <div class="container-lg">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+        <strong>{{message}}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
 
     <div class="container-lg light-style flex-grow-1 container-p-y">
 
@@ -191,69 +201,10 @@
                             <div class="card-body pt-0">
                                 <div class="row">
                                     {% for p in post %}
+                                    {{ pid|json_script:'pid' }}
                                         {% if p.createBy.username == url %}
 
-                                                    <!-- <div class="col-xxl-4 col-lg-4 col-md-6 col-sm-12">
-                                                        <div class="card card-custom shadow-sm bg-white border-white border-0"
-                                                            style="border-radius: 20px; overflow: hidden; border: none;">
-                                                            <a href="{% url 'article-detail' p.id %}" style="text-decoration: none;">
-                                                                <div class="card-custom-img"
-                                                                    style="background-image: url({{ p.thumbnail.url }});"></div>
-
-                                                                <div class="card-body py-1" style="overflow-y: auto">
-                                                                    <div class="d-flex justify-content-between">
-                                                                        <h4 class="card-title theme-color-2">{{ p.title }}</h4>
-
-                                                                        <div class="d-flex justify-content-between">
-                                                                            {% if user.profile.id == p.createBy.id %}
-                                                                            <a class="" href="{% url 'update-post' p.id %}">แก้ไข</a> /
-                                                                            <a class="" href="{% url 'delete-post' p.id %}">ลบ</a>
-                                                                            {% endif %}
-                                                                        </div>
-                                                                        
-                                                                    </div>
-
-                                                                    
-                                                                    
-                                                                    
-                                                                    {{p.body|safe|truncatechars_html:100}}
-
-                                                                    <p class="mb-1 theme-color-2">{{ p.position }}</p>
-
-                                                                    <div class="row">
-                                                                        <div class="col-7">
-                                                                            <p class="card-text mb-1 text-uppercase theme-color-1">แนะนำ : {{p.rating}}</p>
-                                                                        </div>
-                                                                        <div class="col-5">
-                                                                            <p
-                                                                                class="card-text mb-1 text-uppercase text-end theme-color-1">
-                                                                                <i class="far fa-money-bill-alt pr-2"
-                                                                                    style="color: #76b868;"></i>: {{p.money}}
-                                                                            </p>
-                                                                        </div>
-                                                                    </div>
-
-                                                                </div>
-                                                                <div class="card-footer border-top py-1"
-                                                                    style="background: inherit; border-color: inherit;">
-                                                                    <div class="row">
-                                                                        <div class="col-4">
-                                                                            <p class="card-text text-uppercase heading theme-color-1">{{ p.total_likes }} ถูกใจ</p>
-                                                                        </div>
-                                                                        <div class="col-8">
-                                                                            <div class="text-end">
-                                                                                <p class="card-text text-uppercase heading theme-color-1">{{ p.post_date}}</p>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                        
-                                                    </div> -->
-
-
-
+                                                    
                                                     <div class="col-sm-6 col-md-6 col-lg-6 col-xxl-4 ">
                                                         <a href="{% url 'article-detail' p.id %}" style="text-decoration: none;">
                                                         <div class="card mb-2" style="border-radius: 10px; overflow: hidden;">
@@ -322,7 +273,12 @@
                                                             {% if user.profile.id == p.createBy.id %}
                                                             <div class="d-flex justify-content-between">
                                                                 <a class="btn btn-primary btn-sm" href="{% url 'update-post' p.id %}">แก้ไข</a>
-                                                                <a class="btn btn-danger btn-sm ms-1" href="{% url 'delete-post' p.id %}">ลบ</a>
+                                                                <!-- <a class="btn btn-danger btn-sm ms-1" href="{% url 'delete-post' p.id %}">ลบ</a> -->
+
+                                                                <span class="modalbtn btn btn-danger btn-sm ms-1" data-pk="{{p.pk}}" data-thumbnail="{{ p.thumbnail.url }}" data-title="{{p.title}}"
+                                                                    data-toggle="modal" data-target="#quizStartModal">
+                                                                    ลบ
+                                                                </span>
                                                             </div>
                                                             {% endif %}
                                                         </div>
@@ -338,9 +294,26 @@
 
                             </div>
                         </div>
+
+                        <div class="modal fade" id="quizStartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                        aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header text-center">
+                                    <h5 class="modal-title text-center" id="exampleModalLabel">ยืนยันการลบเนื้อหา</h5>
+                                    </div>
+                                    <div class="modal-body" id="modal-body-confirm">
+                                    ...
+                                    </div>
+                                    <div class="modal-footer">
+                                    <a type="button" id="start-button" class="btn btn-primary mx-2" href="">ยืนยัน</a>
+                                    <button type="button" class="btn btn-light" data-dismiss="modal">ยกเลิก</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-
-
                 </div>
             </div>
         </div>
@@ -354,5 +327,6 @@
 {% endfor %}
 {% endif %}
 
+<script src="{% static "js/delete-post-popup.js" %}"></script>
 <script src="{% static "js/addclass.js" %}"></script>
 {% endblock content %}

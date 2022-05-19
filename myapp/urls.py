@@ -22,7 +22,6 @@ urlpatterns = [
     path('profile/<str:username>/edit', login_required(profile_edit, login_url='login'), name="profile-edit"),
     path('profile_post', login_required(profile_post, login_url='login'), name="profile-post"),
     path('addbookmark/<int:id>', addBookmark, name="add-bookmark"),
-    path('delete-bookmark/<int:id>/', deletebookmark, name="delete-bookmark"),
     path('profile_bookmark', login_required(myBookmark, login_url='login'), name="profile-bookmark"),
 
     path('admin_post', login_required(admin_post, login_url='login'), name="admin-post"),
@@ -38,6 +37,8 @@ urlpatterns = [
     path('update-post-status/<int:id>/<str:status>', updatePostStatus, name='updatePostStatus'),
 
     path('article/<int:id>/edit-comment/<int:cid>/', login_required(edit_comment, login_url='login'), name="edit-comment"),
-    path('delete-comment/<int:id>/', login_required(delete_comment, login_url='login'), name="delete-comment")
+    path('delete-comment/<int:id>/', login_required(delete_comment, login_url='login'), name="delete-comment"),
+    path('delete-post/<int:id>/', login_required(delete_post, login_url='login'), name="delete-post"),
+    path('delete-bookmark/<int:id>/', login_required(delete_bookmark, login_url='login'), name="delete-bookmark")
 
 ]

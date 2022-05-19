@@ -26,70 +26,10 @@
                         <hr class="mt-2">
                     </div>
                     <div class="card-body py-0">
-                        <!-- <div class="row">
-                            {% if mybookmark %}
-                            {% for p in mybookmark %}
-                            <div class="col-md-6 col-lg-4 col-xxl-3 pb-3">
-
-                                <div class="card card-custom shadow-sm bg-white border-white border-0"
-                                    style="border-radius: 20px; overflow: hidden; border: none;">
-                                    <a href="{% url 'article-detail' p.bookmark.id %}" style="text-decoration: none;">
-                                        <div class="card-custom-img"
-                                            style="background-image: url({{ p.bookmark.thumbnail.url }});"></div>
-
-                                        <div class="card-body py-1" style="overflow-y: auto">
-                                            <div class="d-flex justify-content-between">
-                                                <h4 class="card-title theme-color-2">{{ p.bookmark.title }}</h4>
-                                                <a href="delete-bookmark/{{p.id}}/">ลบ</a>
-                                            </div>
-
-                                            {{p.bookmark.body|safe|truncatechars_html:80}}
-
-                                            <p class="mb-1 theme-color-2">{{ p.bookmark.position }}</p>
-
-                                            <div class="row">
-                                                <div class="col-7">
-                                                    <p class="card-text mb-1 text-uppercase theme-color-1">แนะนำ :
-                                                        {{p.bookmark.rating}}</p>
-                                                </div>
-                                                <div class="col-5">
-                                                    <p class="card-text mb-1 text-uppercase text-end theme-color-1"><i
-                                                            class="far fa-money-bill-alt pr-2"
-                                                            style="color: #76b868;"></i>: {{p.bookmark.money}}
-                                                    </p>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="card-footer border-top py-1"
-                                            style="background: inherit; border-color: inherit;">
-
-                                            <div class="row">
-                                                <div class="col-4">
-                                                    <p class="card-text text-uppercase heading theme-color-1">{{p.bookmark.total_likes }} ถูกใจ</p>
-                                                </div>
-                                                <div class="col-8">
-                                                    <div class="text-end">
-                                                        <p class="card-text text-uppercase heading theme-color-1">{{p.bookmark.post_date}}</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            {% endfor %}
-                            {% else %}
-                            <div class="py-5">
-                                <p class="theme-color-2 text-center py-5 m-0">ยังไม่มีการบันทึกเนื้อหาใดๆ</p>
-                            </div>
-                            {% endif %}
-                        </div> -->
-
-
                         <div class="row">
                             {% if mybookmark %}
                             {% for p in mybookmark %}
+                            {{ pid|json_script:'pid' }}
                             <div class="col-sm-6 col-md-6 col-lg-4 col-xxl-3 ">
                                 <a href="{% url 'article-detail' p.bookmark.id %}" style="text-decoration: none;">
                                 <div class="card mb-3" style="border-radius: 10px; overflow: hidden;">
@@ -102,7 +42,12 @@
                                                 <div class="p-body-inside">
                                                     <div class="d-flex justify-content-between">
                                                         <p class="theme-color-2 p-header">{{ p.bookmark.title }}</p>
-                                                        <a href="delete-bookmark/{{p.id}}/">ลบ</a>
+                                                        <!-- <a href="delete-bookmark/{{p.id}}/">ลบ</a> -->
+                                                        <span class="modalbtn text-danger" data-pk="{{p.pk}}" data-thumbnail="{{ p.bookmark.thumbnail.url }}" 
+                                                            data-title="{{p.bookmark.title}}"
+                                                            data-toggle="modal" data-target="#quizStartModal">
+                                                            ลบ
+                                                        </span>
                                                     </div>
                                                     <div class="p-body-2">
                                                         {% if p.bookmark.introduce %}
@@ -156,6 +101,27 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="quizStartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header text-center">
+                        <h5 class="modal-title text-center" id="exampleModalLabel">ยืนยันการลบบันทึก</h5>
+                        </div>
+                        <div class="modal-body" id="modal-body-confirm">
+                        ...
+                        </div>
+                        <div class="modal-footer">
+                        <a type="button" id="start-button" class="btn btn-primary mx-2" href="">ยืนยัน</a>
+                        <button type="button" class="btn btn-light" data-dismiss="modal">ยกเลิก</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>
@@ -166,5 +132,6 @@
 
 {% include 'footer.html' %}
 
+<script src="{% static "js/delete-bookmark-popup.js" %}"></script>
 <script src="{% static "js/addclass.js" %}"></script>
 {% endblock content %}

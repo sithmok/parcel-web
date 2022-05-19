@@ -515,13 +515,6 @@ def addBookmark(request,id):
     
     return redirect(request.META['HTTP_REFERER'])
 
-def deletebookmark(request,id):
-    pid = request.GET.get('id', id)
-    bookmark = Bookmark.objects.get(id=pid)
-    bookmark.delete()
-    messages.success(request,'ลบบันทึกดังกล่าวเสร็จสิ้น')
-    return redirect('profile-bookmark')
-    
 def myBookmark(request):
     username = request.user.profile.username
     user = Profile.objects.get(username=username)
@@ -529,10 +522,22 @@ def myBookmark(request):
     context = {'mybookmark':mybookmark}
     return render(request,'profile_bookmark.html',context)
 
+def delete_bookmark(request,id):
+    bookmark = Bookmark.objects.get(id=id)
+    bookmark.delete()
+    messages.success(request,'ลบบันทึกดังกล่าวเสร็จสิ้น')
+    return redirect(request.META['HTTP_REFERER'])
+
 def delete_comment(request, id):  
     comment = Comment.objects.get(id=id)  
     comment.delete() 
-    messages.success(request,'ลบความคิดเห็นเสร็จสิ้น')
+    messages.success(request,'ลบความคิดเห็นดังกล่าวเสร็จสิ้น')
+    return redirect(request.META['HTTP_REFERER'])
+
+def delete_post(request, id):  
+    post =Post.objects.get(id=id)  
+    post.delete() 
+    messages.success(request,'ลบเนื้อหาดังกล่าวเสร็จสิ้น')
     return redirect(request.META['HTTP_REFERER'])
 
 def edit_comment(request,id,cid):
