@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '3-fa@zr#l3zdk33d%v=vzbdz&rjb7k@)d^&0qfi8$64-v4a5dt'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 # ALLOWED_HOSTS = ['parcel-web.herokuapp.com']
@@ -33,7 +33,6 @@ STATICFILES_DIRS = ["/Django Blog 2/firstweb/myapp/static",]
 # Application definition
 
 INSTALLED_APPS = [
-    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
