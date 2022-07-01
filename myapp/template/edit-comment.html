@@ -29,7 +29,7 @@
                           <nav aria-label="breadcrumb">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a href="/article/{{ comment.post_id }}" class="link-secondary underline-hover">เนื้อหา</a></li>
-                                <li class="breadcrumb-item"><a href="#" class="link-primary underline-hover">แก้ไขความคิดเห็น</a></li>
+                                <li class="breadcrumb-item"><a href="#" class="link-success underline-hover">แก้ไขความคิดเห็น</a></li>
                             </ol>
                           </nav>
                         </div>
@@ -80,7 +80,7 @@
                                     height="40" style="border-radius: 5px; object-fit: cover;"/>
                 
                                   <div>
-                                    <p class="m-0 text-primary">{{comment.user.user.first_name}} {{comment.user.user.last_name}}</p>
+                                    <p class="m-0 text-success">{{comment.user.user.first_name}} {{comment.user.user.last_name}}</p>
                                     <p class="m-0 text-grey small">{{comment.stamp|date:"d M Y"}}</p>
                                   </div>
                 
@@ -94,7 +94,7 @@
                                     <textarea class="form-control" name="comment" rows="5" placeholder="แสดงความคิดเห็น..." required>{{comment.comment}}</textarea>
                                 </div>
                                 <div class="d-flex justify-content-end mb-2">
-                                    <button type="submit" class="btn btn-primary">ยืนยัน</button>
+                                    <button type="submit" class="btn btn-success">ยืนยัน</button>
                                     <button type="submit" class="btn btn-light ms-2"><a class="text-dark" style="text-decoration: none;" href="/article/{{ comment.post_id }}">ย้อนกลับ</a></button>
                                 </div>
                                 <hr class="mt-0 mb-2">
@@ -112,5 +112,4 @@
 
 <script src="{% static "js/imagePreview.js" %}"></script>
 
-{% include 'footer.html' %}
 {% endblock content %}

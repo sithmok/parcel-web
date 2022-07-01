@@ -97,6 +97,8 @@ def addpost(request):
         location4 = data.get('location4')
         position = data.get('position')
         Intern_type = data.get('Intern_type')
+        start_time = data.get('start_time')
+        end_time = data.get('end_time')
         money = data.get('money')
         money_type = data.get('money_type')
         introduce = data.get('introduce')
@@ -109,10 +111,6 @@ def addpost(request):
         imageTitles = data.getlist('imageTitle')
         images = request.FILES.getlist('image')
 
-        internworkDetails = data.getlist('internworkDetail')
-        internworkTitles = data.getlist('internworkTitle')
-        internworks = data.getlist('internwork')
-
         newPost = Post()
         newPost.title = title
         newPost.prov = prov
@@ -122,6 +120,8 @@ def addpost(request):
         newPost.location4 = location4
         newPost.position = position
         newPost.Intern_type = Intern_type
+        newPost.start_time = start_time
+        newPost.end_time = end_time
         newPost.money = money
         newPost.money_type = money_type
         newPost.introduce = introduce
@@ -131,22 +131,23 @@ def addpost(request):
         newPost.body4 = body4
         newPost.body5 = body5
         newPost.rating = rating
+
+        document1 = request.FILES['document1']
+        document2 = request.FILES['document2']
+        document3 = request.FILES['document3']
+        document4 = request.FILES['document4']
+        newPost.document1 = document1
+        newPost.document2 = document2
+        newPost.document3 = document3
+        newPost.document4 = document4
+
         newPost.createBy = user
         ###Save Image###
         file_thumbnail = request.FILES['thumbnail']
         newPost.thumbnail = file_thumbnail
         ################
-        newPost.save()
 
-        # if internworkTitles and internworks:
-        #         for internwork, internworkTitle,internworkDetail in zip(internworks, internworkTitles,internworkDetails):
-        #             if internworkTitle != "":
-        #                 new_internWorks = internWorks()
-        #                 new_internWorks.post  = Post.objects.get(title=title)
-        #                 new_internWorks.work = internwork
-        #                 new_internWorks.work_name = internworkTitle
-        #                 new_internWorks.work_detail = internworkDetail
-        #                 new_internWorks.save()
+        newPost.save()
 
         if imageTitles and images:
                 for image, imageTitle in zip(images, imageTitles):
@@ -258,6 +259,8 @@ def updatepost(request,id):
         location4 = data.get('location4')
         position = data.get('position')
         Intern_type = data.get('Intern_type')
+        start_time = data.get('start_time')
+        end_time = data.get('end_time')
         money = data.get('money')
         money_type = data.get('money_type')
         introduce = data.get('introduce')
@@ -269,7 +272,7 @@ def updatepost(request,id):
         rating = data.get('rating')
         imageTitles = data.getlist('imageTitle')
         images = request.FILES.getlist('image')
-        
+
         editPost = Post.objects.get(id=id)
         editPost.title = title
         editPost.prov = prov
@@ -279,6 +282,8 @@ def updatepost(request,id):
         editPost.location4 = location4
         editPost.position = position
         editPost.Intern_type = Intern_type
+        editPost.start_time = start_time
+        editPost.end_time = end_time
         editPost.money = money
         editPost.money_type = money_type
         editPost.introduce = introduce
@@ -288,6 +293,16 @@ def updatepost(request,id):
         editPost.body4 = body4
         editPost.body5 = body5
         editPost.rating = rating
+
+        document1 = request.FILES['document1']
+        document2 = request.FILES['document2']
+        document3 = request.FILES['document3']
+        document4 = request.FILES['document4']
+        editPost.document1 = document1
+        editPost.document2 = document2
+        editPost.document3 = document3
+        editPost.document4 = document4
+
         editPost.save()
         ###Save Image###
 
@@ -464,6 +479,11 @@ def register(request):
         if User.objects.filter(email=email):
             messages.warning(request,'Email นี้ถูกใช้ไปแล้ว')
             return redirect('/register/')
+
+        elif User.objects.filter(username=user_name):
+            messages.warning(request,'ชื่อผู้ใช้ นี้ถูกใช้ไปแล้ว')
+            return redirect('/register/')
+            
         else:
             newuser = User()
             newuser.username = user_name
@@ -627,6 +647,57 @@ def updatePostStatus (request, id, status):
             return redirect ('admin-post')
         
         
+def studentRegister (request):
+    username = request.user.profile.username
+    user = Profile.objects.get(username=username)
+    
+    if request.method == 'POST':
+        data = request.POST.copy()
+        identificationNumber = data.get('identificationNumber')
+        studentCard = request.FILES["studentCard"]
+
+        newStudent = StudentPending()
+        newStudent.user = user
+        newStudent.studentCard = studentCard
+        newStudent.identificationNumber = identificationNumber
+        newStudent.save()
+
+        user = Profile.objects.get(username=username)
+        user.apply = True
+        user.save()
+
         
+        messages.success(request,'ส่งหลักฐานยืนยันความเป็นนักศึกษาเรียบร้อย รอทางแอดมินตรวจสอบ')
+        return redirect(request.META['HTTP_REFERER'])
 
+    return render(request, 'student-register.html')
+    
+def updateStudentStatus (request, uid, tid, status):
+    if request.user.profile.userType != 'admin':
+        return redirect('home')
+        
+    StudentPending = StudentPending.objects.get(id=tid)
+    profile = Profile.objects.get(id=uid)
+    
+    if status == 'approve':
+        StudentPending.approve = True
+        profile.userType = 'teacher'
+        StudentPending.save()
+    elif status == 'disapprove':
+        StudentPending.approve = False
+        profile.userType = 'student'
+        profile.apply = False
+        StudentPending.delete()
+        
+    profile.save()
 
+    return redirect ('teacher')
+    
+def admin_studentPending (request):
+    student = StudentPending.objects.all()
+    
+    context = {
+		'student' : student
+	}
+    
+    return render(request, 'admin_studentPending.html', context)

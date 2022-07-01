@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} ยืนยันตัวตน {% endblock %}
+{% block content %}
+
+<div class="container-lg position-relative">
+    <div class="row justify-content-center px-0 pt-3">
+
+    <div class="row justify-content-center px-0">
+        <div class="col-xxl-10 col-lg-8 col-md-9 col-sm-10 col-12 px-0">
+          {% if messages %}
+          {% for message in messages %}
+          <div class="alert alert-{{message.tags}} alert-dismissible fade show mt-0 mb-2 mx-auto" role="alert">
+          
+          <p class="m-0">{{message}}</p>
+          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+          {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+
+    <div class="col-xxl-6 col-lg-8 col-md-9 col-sm-10 col-12 px-0">
+        <div class="card py-3 px-3 shadow-sm">
+            <h3 class="text-center">ยืนยันความเป็นนักศึกษา</h3>
+            <hr class="mt-0">
+            
+            <div class="form-group">
+                <form method="POST" id="formSave" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row pt-3">
+
+                        <h6 class="mb-0 text-center">กรอกข้อมูลตามที่กำหนด</h6>
+
+                        <div class="form-group">
+                            <label for="studentCard"><p class="m-0">รูปบัตรประจำตัวนักศึกษา<span style="color: rgb(255, 0, 0);">*</span></p></label>
+                            <input type="file" class="form-control" name="studentCard" accept="image/*" title="เพิ่มรูปภาพ" required>
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label for="studentCard"><p class="m-0">เลขประจำตัวนักศึกษา<span style="color: rgb(255, 0, 0);">*</span></p></label>
+                            <input type="text" class="form-control" placeholder="รหัสประจำตัวนักศึกษา" pattern="[0-9]{11}" title="รหัสประจำตัวนักศึกษามีความยาว 11 ตัว" name="identificationNumber" required>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+
+            <div class="d-flex justify-content-end mt-3">
+                <button class="btn btn-success" type="submit" form="formSave">ส่งคำขอ</button>
+            </div>
+
+        </div>
+    </div>
+
+    </div>
+</div>
+
+{% endblock content %}

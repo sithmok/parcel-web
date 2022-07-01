@@ -19,7 +19,8 @@ class Profile (models.Model):
     instagram = models.CharField(max_length=500, null=False, blank=True)
     website = models.CharField(max_length=500, null=False, blank=True)
     github = models.CharField(max_length=500, null=False, blank=True)
-    usertype = models.CharField(max_length=100,default='member', choices=[('member','member'), ('admin','admin')])
+    usertype = models.CharField(max_length=100,default='member', choices=[('member','member'), ('student','student'), ('admin','admin')])
+    apply = models.BooleanField(default=False)
 
     def __str__(self):
         # return self.user.first_name + ' ' + str(self.user.last_name)
@@ -43,7 +44,7 @@ class Post (models.Model):
     location3 = models.CharField(max_length=255,null=True, blank=True)
     location4 = models.CharField(max_length=255,null=True, blank=True)
     position = models.CharField(max_length=255,null=True, blank=False)
-    Intern_type = models.CharField(max_length=255,null=False, blank=False, choices=[('1-2 เดือน','1-2 เดือน'),('2-3 เดือน','2-3 เดือน'),('3-4 เดือน','3-4 เดือน'),('4-5 เดือน','4-5 เดือน'),('6 เดือนขึ้นไป','6 เดือนขึ้นไป')])
+    Intern_type = models.CharField(max_length=255,null=False, blank=False, choices=[('ปกติ','ปกติ'),('สหกิจ','สหกิจ')])
     money = models.IntegerField(default=1, blank=True)
     money_type = models.CharField(max_length=255,null=True, blank=True, choices=[('วัน','วัน'),('สัปดาห์','สัปดาห์'),('เดือน','เดือน')])
     introduce = models.CharField(max_length=1000,null=True, blank=False)
@@ -57,6 +58,13 @@ class Post (models.Model):
     createBy = models.ForeignKey(Profile,on_delete=models.CASCADE,blank=True, null=True)
     likes = models.ManyToManyField(Profile, blank=True, related_name='likes')
     active = models.BooleanField(default=False)
+    start_time = models.DateField()
+    end_time = models.DateField()
+    document1 = models.FileField(upload_to="document1/",null=True, blank=True)
+    document2 = models.FileField(upload_to="document2/",null=True, blank=True)
+    document3 = models.FileField(upload_to="document3/",null=True, blank=True)
+    document4 = models.FileField(upload_to="document4/",null=True, blank=True)
+    
     
     def __str__(self):
         # return self.title + ' | ' + str(self.createBy) + ' ' + str(self.post_date) + ' | ' + str(self.id)
@@ -103,3 +111,15 @@ class Comment (models.Model):
 
     def __str__(self):
         return str(self.post)
+
+
+class StudentPending (models.Model):
+    user = models.ForeignKey(Profile, on_delete=CASCADE)
+    studentCard = models.ImageField(upload_to="studentCard/",null=True,blank=False)
+    identificationNumber = models.CharField(max_length=11 ,null=True,blank=False)
+    approve = models.BooleanField(default=False)
+    applyDate = models.DateTimeField(auto_now_add=True)
+    approveDate = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '%s' % (self.user.user.first_name)

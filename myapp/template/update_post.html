@@ -117,18 +117,37 @@
                                 </div>
                             </div>
 
-                            <div class="">
+                            <!-- <div class="">
                                 <label for="Intern_type"><p class="m-0">เวลาการฝึกงาน <span style="color: rgb(255, 0, 0);">*</span></p></label>
                                 <select class="form-select" name="Intern_type" required>
                                     <option selected value="{{ post.Intern_type }}">{{ post.Intern_type }}</option>
-                                    <!-- <option value="ปกติ">ปกติ</option>
-                                    <option value="สหกิจ">สหกิจ</option> -->
                                     <option value="1-2 เดือน">1-2 เดือน</option>
                                     <option value="2-3 เดือน">2-3 เดือน</option>
                                     <option value="3-4 เดือน">3-4 เดือน</option>
                                     <option value="4-5 เดือน">4-5 เดือน</option>
                                     <option value="6 เดือนขึ้นไป">6 เดือนขึ้นไป</option>
                                 </select>
+                            </div> -->
+
+                            <div class="">
+                                <label for="Intern_type"><p class="m-0">ประเภทการฝึกงาน <span style="color: rgb(255, 0, 0);">*</span></p></label>
+                                <select class="form-select documentType" name="Intern_type" onchange="yesnoCheck(this);" required>
+                                    <option selected value="{{ post.Intern_type }}">{{ post.Intern_type }}</option>
+                                    <option value="ปกติ">ปกติ</option>
+                                    <option value="สหกิจ">สหกิจ</option>
+                                </select>
+                            </div>
+
+                            <div class="row mt-2">
+                                <div class="col-lg-6 mt-2">
+                                    <label for="start_time"><p class="m-0">วันที่เริ่มการฝึกงาน <span style="color: rgb(255, 0, 0);">*</span></p></label>
+                                    <input type="date" class="form-control" id="start_time" name="start_time" maxlength="4" required>
+                                </div>
+    
+                                <div class="col-lg-6 mt-2">
+                                    <label for="end_time"><p class="m-0">วันที่จบการฝึกงาน <span style="color: rgb(255, 0, 0);">*</span></p></label>
+                                    <input type="date" class="form-control" id="end_time" name="end_time" required>
+                                </div>
                             </div>
 
                             <div class="row mt-2">
@@ -286,12 +305,38 @@
                             </div>
     
                             <div class="d-flex justify-content-end my-3" id="el2">
-                                <button class="btn btn-outline-primary" type="button" onclick="addotherPostImage()">เพิ่มช่อง</button>
+                                <button class="btn btn-outline-success" type="button" onclick="addotherPostImage()">เพิ่มช่อง</button>
                             </div>
                             
 
-                            <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-primary">ยืนยัน</button>
+                            <h4 class="text-success mt-2 mb-2">เอกสาร</h4>
+                            <hr class="mt-0">
+                            <div class="mt-2" id="document1">
+                                <label for="rating"><p class="m-0">เอกสารรายละเอียดพี่เลี้ยง (PDF File)<span style="color: rgb(255, 0, 0);">*</span></p></label>
+                                <input type="file" class="form-control document1" name="document1" accept=".pdf" />
+
+                                <h1>PDF Example</h1>
+                                <p>Open a PDF file <a href="{{post.document1.url}}" target="_blank">example</a>.</p>
+                            </div>
+
+                            <div class="mt-2" id="document2">
+                                <label for="rating"><p class="m-0">โปสเตอร์ (PDF File)<span style="color: rgb(255, 0, 0);">*</span></p></label>
+                                <input type="file" class="form-control document2" name="document2" accept=".pdf" />
+                            </div>
+
+                            <div class="mt-2" id="document3">
+                                <label for="rating"><p class="m-0">ใบบันทึกรายละเอียด (บันทึกการฝึกสหกิจ) (PDF File)<span style="color: rgb(255, 0, 0);">*</span></p></label>
+                                <input type="file" class="form-control document3" name="document3" accept=".pdf" />
+                            </div>
+
+                            <div class="mt-2" id="document4">
+                                <label for="rating"><p class="m-0">จดหมายนำส่งฝึกสหกิจ (PDF File)<span style="color: rgb(255, 0, 0);">*</span></p></label>
+                                <input type="file" class="form-control document4" name="document4" accept=".pdf" />
+                            </div>
+
+
+                            <div class="d-grid gap-2 mt-3">
+                                <button type="submit" class="btn btn-success">ยืนยัน</button>
                             </div>
                         </form>
                     </div>
@@ -301,9 +346,10 @@
     </div>
 </section>
 
-<button class="gotoBottom1 btn btn-outline-primary bg-white" onclick="scrollFunction1()"><i class="fa-solid fa-arrow-up"></i></button>
-<button class="gotoBottom2 btn btn-outline-primary bg-white" onclick="scrollFunction2()"><i class="fa-solid fa-arrow-down"></i></button>
+<button class="gotoBottom1 btn btn-outline-success bg-white" onclick="scrollFunction1()"><i class="fa-solid fa-arrow-up"></i></button>
+<button class="gotoBottom2 btn btn-outline-success bg-white" onclick="scrollFunction2()"><i class="fa-solid fa-arrow-down"></i></button>
 
+<script src="{% static "js/documentType.js" %}"></script>
 <script src="{% static "js/checkboxAll.js" %}"></script>
 <script src="{% static "js/scroll.js" %}"></script>
 <script src="{% static "js/addotherPostImage.js" %}"></script>

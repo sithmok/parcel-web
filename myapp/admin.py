@@ -8,4 +8,4 @@ admin.site.register(Comment)
 admin.site.register(Province)
 admin.site.register(Bookmark)
 admin.site.register(Profile)
-
+admin.site.register(StudentPending)

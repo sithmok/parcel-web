@@ -66,18 +66,15 @@
                                 </div>
 
                                 <div class="col-xxl-4 col-lg-4 col-md-4 col-sm-12">
-                                    <label for="form-label"><p>เวลาการฝึกงาน</p></label>
+                                    <label for="form-label"><p>ประเภทการฝึกงาน</p></label>
                                     <div class="input-group">
                                         <select class="form-select" id="intern_type" aria-label="Default select example"
                                             name="intern_type">
                                             <option selected>เลือก...</option>
                                             <!-- <option value="ปกติ">ปกติ</option>
                                             <option value="สหกิจ">สหกิจ</option> -->
-                                            <option value="1-2 เดือน">1-2 เดือน</option>
-                                            <option value="2-3 เดือน">2-3 เดือน</option>
-                                            <option value="3-4 เดือน">3-4 เดือน</option>
-                                            <option value="4-5 เดือน">4-5 เดือน</option>
-                                            <option value="6 เดือนขึ้นไป">6 เดือนขึ้นไป</option>
+                                            <option value="ปกติ">ปกติ</option>
+                                            <option value="สหกิจ">สหกิจ</option>
                                         </select>
                                     </div>
                                 </div>
@@ -113,11 +110,11 @@
 
                     <div class="row mt-2">
                         <div class="col-6 d-grid">
-                            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i> ค้นหา</button>
+                            <button type="submit" class="btn btn-success"><i class="fa-solid fa-magnifying-glass"></i> ค้นหา</button>
                         </div>
                         <div class="col-6 d-grid">
                             <!-- <button type="submit" class="btn btn-orange"><i class="fa-solid fa-magnifying-glass"></i> ค้นหา</button> -->
-                            <a href="{% url 'home' %}" class="btn btn-outline-primary"><i class="fa-solid fa-arrow-rotate-right"></i> ล้าง</a>
+                            <a href="{% url 'home' %}" class="btn btn-outline-success"><i class="fa-solid fa-arrow-rotate-right"></i> ล้าง</a>
                         </div>
                     </div>
                 </form>
@@ -168,7 +165,7 @@
                                         <p class="card-text text-end text-grey">{{p.money}}/{{p.money_type}}</p>
                                         {% else %}
                                         <p class="card-text text-end text-grey">
-                                            <i class="far fa-money-bill-alt pr-2" style="color: #06F;"></i> : ไม่มี
+                                            <i class="far fa-money-bill-alt pr-2" style="color: #198754;"></i> : ไม่มี
                                         </p>
                                         {% endif %}
                                     </div>
@@ -238,7 +235,7 @@
                                         <p class="card-text text-end text-grey">{{p.money}}/{{p.money_type}}</p>
                                         {% else %}
                                         <p class="card-text text-end text-grey">
-                                            <i class="far fa-money-bill-alt pr-2" style="color: #06F;"></i> : ไม่มี
+                                            <i class="far fa-money-bill-alt pr-2" style="color: #198754;"></i> : ไม่มี
                                         </p>
                                         {% endif %}
                                     </div>

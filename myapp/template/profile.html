@@ -74,7 +74,7 @@
                                 {% endif %} -->
                                 {% if currentUser == url %}
                                 <div class="d-flex justify-content-end mt-2">
-                                    <button class="btn btn-primary">
+                                    <button class="btn btn-success">
                                         <a href="/profile/{{user.profile.username}}/edit"
                                             class="text-white text-decoration-none">แก้ไข</a>
                                     </button>
@@ -104,7 +104,7 @@
 
                                 {% if currentUser == url %}
                                 <div class="d-flex justify-content-end mb-3">
-                                    <button class="btn btn-primary">
+                                    <button class="btn btn-success">
                                         <a href="/profile/{{user.profile.username}}/edit"
                                             class="text-white text-decoration-none">แก้ไข</a>
                                     </button>
@@ -182,7 +182,7 @@
 
                                 {% if currentUser == url %}
                                 <div class="d-flex justify-content-end mt-2 mb-3">
-                                    <button class="btn btn-primary">
+                                    <button class="btn btn-success">
                                         <a href="/profile/{{user.profile.username}}/edit"
                                             class="text-white text-decoration-none">แก้ไข</a>
                                     </button>
@@ -272,7 +272,7 @@
 
                                                             {% if user.profile.id == p.createBy.id %}
                                                             <div class="d-flex justify-content-between">
-                                                                <a class="btn btn-primary btn-sm" href="{% url 'update-post' p.id %}">แก้ไข</a>
+                                                                <a class="btn btn-success btn-sm" href="{% url 'update-post' p.id %}">แก้ไข</a>
                                                                 <!-- <a class="btn btn-danger btn-sm ms-1" href="{% url 'delete-post' p.id %}">ลบ</a> -->
 
                                                                 <span class="modalbtn btn btn-danger btn-sm ms-1" data-pk="{{p.pk}}" data-thumbnail="{{ p.thumbnail.url }}" data-title="{{p.title}}"
@@ -306,7 +306,7 @@
                                     ...
                                     </div>
                                     <div class="modal-footer">
-                                    <a type="button" id="start-button" class="btn btn-primary mx-2" href="">ยืนยัน</a>
+                                    <a type="button" id="start-button" class="btn btn-success mx-2" href="">ยืนยัน</a>
                                     <button type="button" class="btn btn-light" data-dismiss="modal">ยกเลิก</button>
                                     </div>
                                 </div>

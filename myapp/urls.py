@@ -1,10 +1,13 @@
 from django.urls import path, include
 from .views import*
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import views as auth_views
+# from django.conf import settings
+# from django.conf.urls.static import static
 
 urlpatterns = [
     path('', main, name = 'main'),
-    path('home/', login_required(home,login_url='login'), name="home"),
+    path('home/', home, name="home"),
     path('add_post/', login_required(addpost, login_url='login'), name="add-post"),
 
     path('article/<int:id>', login_required(postdetail, login_url='login'), name="article-detail"),
@@ -39,6 +42,13 @@ urlpatterns = [
     path('article/<int:id>/edit-comment/<int:cid>/', login_required(edit_comment, login_url='login'), name="edit-comment"),
     path('delete-comment/<int:id>/', login_required(delete_comment, login_url='login'), name="delete-comment"),
     path('delete-post/<int:id>/', login_required(delete_post, login_url='login'), name="delete-post"),
-    path('delete-bookmark/<int:id>/', login_required(delete_bookmark, login_url='login'), name="delete-bookmark")
+    path('delete-bookmark/<int:id>/', login_required(delete_bookmark, login_url='login'), name="delete-bookmark"),
 
+    path('student-register', login_required(studentRegister, login_url='login'), name='student-register'),
+
+
+    path('admin_studentPending', admin_studentPending, name='admin-studentPending'),
+    path('admin_update-student-status/<int:uid>/<int:tid>/<str:status>', updateStudentStatus, name='updateTeacherStatus'),
+
+    
 ]

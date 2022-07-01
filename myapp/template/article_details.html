@@ -35,7 +35,7 @@
                 <div class="d-flex bd-highlight">
                   <img src="{{ p.createBy.photo.url }}" alt=""  style="min-width: 50px; min-height: 50px; width: 50px; height: 50px; margin-right: 12px; border-radius: 5px; object-fit: cover;">
                   <div class="d-flex flex-column justify-content-around">
-                    <p class="m-0 text-primary"><a class="link-primary underline-hover" href="/profile/{{p.createBy.username}}">{{ p.createBy.user.first_name }} {{ p.createBy.user.last_name }}</a></p>
+                    <p class="m-0 text-success"><a class="link-success underline-hover" href="/profile/{{p.createBy.username}}">{{ p.createBy.username }}</a></p>
                     <p class="m-0 text-grey"> {{p.post_date|date:"d M Y"}}</p>
                   </div>
                 </div>
@@ -45,9 +45,9 @@
                     <form action="{% url 'like_post' %}" method="post">
                       {% csrf_token %}
                       {% if is_liked %}
-                      <button class="btn btn-outline-primary mx-1 btn-sm" type="submit" name="post_id" value="{{ p.id }}">เลิกถูกใจ</button>
+                      <button class="btn btn-outline-success mx-1 btn-sm" type="submit" name="post_id" value="{{ p.id }}">เลิกถูกใจ</button>
                       {% else %}
-                      <button class="btn btn-primary mx-1 btn-sm" type="submit" name="post_id" value="{{ p.id }}">ถูกใจ</button>
+                      <button class="btn btn-success mx-1 btn-sm" type="submit" name="post_id" value="{{ p.id }}">ถูกใจ</button>
                       {% endif %}
                     </form>
   
@@ -60,18 +60,18 @@
                           <!-- {% if myBookmark %} -->
                           {% for bm in myBookmark %}
                           {% if user.profile.id == bm.user.id %}
-                          <a class="btn btn-outline-primary mx-1 btn-sm" href="{% url 'add-bookmark' p.id %}">เลิกบันทึก</a>
+                          <a class="btn btn-outline-success mx-1 btn-sm" href="{% url 'add-bookmark' p.id %}">เลิกบันทึก</a>
                           {% endif %}
                           {% endfor %}
       
                         
                           <!-- {% else %} -->
-                          <a class="btn btn-primary mx-1 btn-sm" href="{% url 'add-bookmark' p.id %}">บันทึก</a>
+                          <a class="btn btn-success mx-1 btn-sm" href="{% url 'add-bookmark' p.id %}">บันทึก</a>
                           <!-- {% endif %} -->
                           
                       {% endif %}
                       {% else %}
-                      <a class="btn btn-primary mx-1 btn-sm" href="{% url 'add-bookmark' p.id %}">บันทึก</a>
+                      <a class="btn btn-success mx-1 btn-sm" href="{% url 'add-bookmark' p.id %}">บันทึก</a>
                       {% endif %}
                     </form>
                   
@@ -126,7 +126,7 @@
 
                 <div class="d-flex justify-content-between mb-3">
                   <h6 class="m-0 fw-bold">ที่มาและเหตุผลที่เลือกฝึกงานกับบริษัทนี้</h6>
-                  <button class="btn btn-outline-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample0" aria-expanded="false" aria-controls="collapseExample0">
+                  <button class="btn btn-outline-success btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample0" aria-expanded="false" aria-controls="collapseExample0">
                     เปิด-ปิด
                   </button>
                 </div>
@@ -141,7 +141,7 @@
                 
                 <div class="d-flex justify-content-between mb-3">
                   <h6 class="m-0 fw-bold">จุดประสงค์หรือการทำงานของบริษัทที่ฝึกงาน</h6>
-                  <button class="btn btn-outline-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
+                  <button class="btn btn-outline-success btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">
                     เปิด-ปิด
                   </button>
                 </div>
@@ -157,7 +157,7 @@
 
                 <div class="d-flex justify-content-between mb-3">
                   <h6 class="m-0 fw-bold">สภาพแวดล้อม เพื่อนร่วมงาน พี่เลี้ยง และบรรยากาศในการทำงาน</h6>
-                  <button class="btn btn-outline-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
+                  <button class="btn btn-outline-success btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2">
                     เปิด-ปิด<i class="fa-solid fa-line-height"></i>
                   </button>
                 </div>
@@ -173,7 +173,7 @@
 
                 <div class="d-flex justify-content-between mb-3">
                   <h6 class="m-0 fw-bold">สิ่งที่ได้ลองหรือทำตลอดระยะเวลาการฝึกงาน</h6>
-                  <button class="btn btn-outline-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">
+                  <button class="btn btn-outline-success btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample3" aria-expanded="false" aria-controls="collapseExample3">
                     เปิด-ปิด
                   </button>
                 </div>
@@ -189,7 +189,7 @@
 
                 <div class="d-flex justify-content-between mb-3">
                   <h6 class="m-0 fw-bold">การเตรียมตัวและข้อเสนอแนะเพิ่มเติมสำหรับผู้ที่สนใจ</h6>
-                  <button class="btn btn-outline-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample4" aria-expanded="false" aria-controls="collapseExample4">
+                  <button class="btn btn-outline-success btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample4" aria-expanded="false" aria-controls="collapseExample4">
                     เปิด-ปิด
                   </button>
                 </div>
@@ -205,7 +205,7 @@
 
                 <div class="d-flex justify-content-between mb-3">
                   <h6 class="m-0 fw-bold">ช่องทางการติดต่อบริษัท</h6>
-                  <button class="btn btn-outline-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample5" aria-expanded="false" aria-controls="collapseExample5">
+                  <button class="btn btn-outline-success btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample5" aria-expanded="false" aria-controls="collapseExample5">
                     เปิด-ปิด
                   </button>
                 </div>
@@ -221,7 +221,7 @@
                 {% if my_internWorks %}
                 <div class="d-flex justify-content-between mb-3">
                   <h6 class="m-0 text-center fw-bold">ลิงก์ผลงาน</h6>
-                  <button class="btn btn-outline-primary btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample6" aria-expanded="false" aria-controls="collapseExample6">
+                  <button class="btn btn-outline-success btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample6" aria-expanded="false" aria-controls="collapseExample6">
                     เปิด-ปิด
                   </button>
                 </div>
@@ -236,7 +236,7 @@
                           <p class="m-0">{{w.work_detail}}</p>
                         </div>
                         <div class="col-12 text-center">
-                          <a href="#" class="link-primary underline-hover">คลิกเพื่อดู</a>
+                          <a href="#" class="link-success underline-hover">คลิกเพื่อดู</a>
                         </div>
                       </div>
                       {% endfor %}
@@ -264,13 +264,13 @@
                 {% endfor %}
               </div>
             
-              <button class="carousel-control-prev shadow-sm my-auto" type="button" data-bs-target="#carouselExampleIndicators" style="height: 35px; width: 35px; border: 1px solid #06F; background-color: white; opacity: 100%;" data-bs-slide="prev">
+              <button class="carousel-control-prev shadow-sm my-auto" type="button" data-bs-target="#carouselExampleIndicators" style="height: 35px; width: 35px; border: 1px solid #198754; background-color: white; opacity: 100%;" data-bs-slide="prev">
                
                 <i class="fa-solid fa-chevron-left theme-color-2"></i>
                 <span class="visually-hidden">Previous</span>
               </button>
 
-              <button class="carousel-control-next shadow-sm my-auto" type="button" data-bs-target="#carouselExampleIndicators" style="height: 35px; width: 35px; border: 1px solid #06F; background-color: white; opacity: 100%;" data-bs-slide="next">
+              <button class="carousel-control-next shadow-sm my-auto" type="button" data-bs-target="#carouselExampleIndicators" style="height: 35px; width: 35px; border: 1px solid #198754; background-color: white; opacity: 100%;" data-bs-slide="next">
                
                 <i class="fa-solid fa-chevron-right theme-color-2"></i>
                 <span class="visually-hidden">Next</span>
@@ -299,12 +299,12 @@
                     <button type="button" class="btn btn-outline-primary btn-sm">Cancel</button>
                   </div> -->
                   <div class="d-flex justify-content-end mt-2">
-                    <button class="btn btn-primary btn-sm" type="submit" >ตกลง</button>
+                    <button class="btn btn-success btn-sm" type="submit" >ตกลง</button>
                   </div>
                   
               </div>
 
-              <p class="mt-2 mb-2 px-3 text-primary fw-bold text-center text-md-start">ความคิดเห็น ({{commentCount}})</p>
+              <p class="mt-2 mb-2 px-3 text-success fw-bold text-center text-md-start">ความคิดเห็น ({{commentCount}})</p>
               
               <div class="card-body py-0 overflow-auto border-top pt-2" style="max-height: 280px;">
                 {% for c in comment %}
@@ -315,7 +315,7 @@
                     height="40" style="border-radius: 5px; object-fit: cover;"/>
 
                   <div>
-                    <p class="m-0 text-primary"><a class="link-primary underline-hover" href="/profile/{{c.user.username}}">{{c.user.user.first_name}} {{c.user.user.last_name}}</a></p>
+                    <p class="m-0 text-success"><a class="link-success underline-hover" href="/profile/{{c.user.username}}">{{c.user.user.first_name}} {{c.user.user.last_name}}</a></p>
                     <p class="m-0 text-grey small">{{c.stamp}}</p>
                   </div>
 
@@ -330,7 +330,7 @@
                 <p class="mt-2 pb-2 mb-0">{{c.comment}}</p>
                 {% if user.id == c.user.user.id %}
                 <div class="d-flex justify-content-end mb-2">
-                  <a href="{{p.id}}/edit-comment/{{c.id}}/" class="btn btn-primary btn-sm ms-1">แก้ไข</a>
+                  <a href="{{p.id}}/edit-comment/{{c.id}}/" class="btn btn-success btn-sm ms-1">แก้ไข</a>
                   <!-- <a href="/delete-comment/{{c.id}}/" class="btn btn-danger btn-sm ms-1">ลบ</a> -->
 
                   <span class="modalbtn btn btn-danger btn-sm ms-1" data-pk="{{c.pk}}" data-photo="{{ c.user.photo.url }}" data-firstname="{{c.user.user.first_name}}"
@@ -362,7 +362,7 @@
               ...
             </div>
             <div class="modal-footer">
-              <a type="button" id="start-button" class="btn btn-primary mx-2" href="">ยืนยัน</a>
+              <a type="button" id="start-button" class="btn btn-success mx-2" href="">ยืนยัน</a>
               <button type="button" class="btn btn-light" data-dismiss="modal">ยกเลิก</button>
             </div>
           </div>
@@ -379,12 +379,12 @@
                 height="150" width="150" alt="" loading="lazy" style="border-radius: 5px; object-fit: cover;"/>
             </div>
             
-            <h5 class="">{{ p.createBy.user.first_name }} {{ p.createBy.user.last_name }}</h5>
+            <h5 class="">{{ p.createBy.username }}</h5>
 
             <p class="px-4 mb-2">{{ p.createBy.bio }}</p>
 
             <a href="/profile/{{p.createBy.username}}" style="text-decoration: none; border-radius: 15px;" class="mx-auto mb-3">
-              <button type="button" class="btn btn-primary"><p class="m-0 text-white">โปรไฟล์</p></button>
+              <button type="button" class="btn btn-success"><p class="m-0 text-white">โปรไฟล์</p></button>
             </a>
 
             
@@ -394,7 +394,7 @@
               <p class="mb-2"><strong>ช่องทางติดต่อสอบถาม</strong></p>
 
               {% if p.createBy.facebook %}
-              <a class="btn btn-primary px-3" href="{{p.createBy.facebook}}" role="button" target="_blank">
+              <a class="btn btn-success px-3" href="{{p.createBy.facebook}}" role="button" target="_blank">
                 <i class="fab fa-facebook-f" style="color: white;"></i>
               </a>
               {% else %}
@@ -404,7 +404,7 @@
               {% endif %}
 
               {% if p.createBy.twitter %}
-              <a class="btn btn-primary px-3" href="{{p.createBy.twitter}}" role="button" target="_blank">
+              <a class="btn btn-success px-3" href="{{p.createBy.twitter}}" role="button" target="_blank">
                 <i class="fab fa-twitter" style="color: white;"></i>
               </a>
               {% else %}
@@ -414,7 +414,7 @@
               {% endif %}
 
               {% if p.createBy.instagram %}
-              <a class="btn btn-primary px-3" href="{{p.createBy.instagram}}" role="button" target="_blank">
+              <a class="btn btn-success px-3" href="{{p.createBy.instagram}}" role="button" target="_blank">
                 <i class="fab fa-instagram" style="color: white;"></i>
               </a>
               {% else %}
@@ -436,8 +436,8 @@
 </section>
 {% endfor %}
 
-<button class="gotoBottom1 btn btn-outline-primary bg-white" onclick="scrollFunction1()" style="z-index: 9999;"><i class="fa-solid fa-arrow-up"></i></button>
-<button class="gotoBottom2 btn btn-outline-primary bg-white" onclick="scrollFunction2()" style="z-index: 9999;"><i class="fa-solid fa-arrow-down"></i></button>
+<button class="gotoBottom1 btn btn-outline-success bg-white" onclick="scrollFunction1()" style="z-index: 9999;"><i class="fa-solid fa-arrow-up"></i></button>
+<button class="gotoBottom2 btn btn-outline-success bg-white" onclick="scrollFunction2()" style="z-index: 9999;"><i class="fa-solid fa-arrow-down"></i></button>
 
 <script src="{% static "js/delete-comment-popup.js" %}"></script>
 <script src="{% static "js/article-Detail-AddChild.js" %}"></script>
