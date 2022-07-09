@@ -15,7 +15,7 @@ modalBtns.forEach(modalBtn => modalBtn.addEventListener('click', () => {
 			<img src="${thumbnail}" alt="" style="width: 100%; height: 100%; text-align: center; object-fit: cover; color: transparent; text-indent: 10000px;">
 		</div>
 
-        <h3 class="m-0 px-3 text-center mt-3 text-primary">${title}</h3>
+        <h3 class="m-0 px-3 text-center mt-3 text-success">${title}</h3>
 	</div>
 	`
 	startBtn.setAttribute('href', `/delete-bookmark/${pk}`)

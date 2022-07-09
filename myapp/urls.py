@@ -29,11 +29,13 @@ urlpatterns = [
 
     path('admin_post', login_required(admin_post, login_url='login'), name="admin-post"),
     path('admin-delete-post/<int:id>/', login_required(admin_delete_post, login_url='login'), name="admin-delete-post"),
-    path('admin-delete-member/<int:id>/', login_required(admin_delete_member, login_url='login'), name="admin-delete-member"),
+    path('admin-delete-memberApprove/<int:id>/', login_required(admin_delete_memberApprove, login_url='login'), name="admin-delete-member"),
 
     path('admin_confirm', login_required(admin_confirm, login_url='login'), name="admin-confirm"),
 
     path('admin_member', login_required(admin_member, login_url='login'), name="admin-member"),
+
+    path('admin_student_confirmed', login_required(admin_student_confirmed, login_url='login'), name="admin-student-confirmed"),
 
     path(r'^like/$', like_post, name="like_post"),
 
@@ -48,7 +50,7 @@ urlpatterns = [
 
 
     path('admin_studentPending', admin_studentPending, name='admin-studentPending'),
-    path('admin_update-student-status/<int:uid>/<int:tid>/<str:status>', updateStudentStatus, name='updateTeacherStatus'),
+    path('admin_update-student-status/<int:uid>/<int:sid>/<str:status>', updateStudentStatus, name='updateStudentStatus'),
 
     
 ]

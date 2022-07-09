@@ -21,7 +21,7 @@ modalBtns.forEach(modalBtn => modalBtn.addEventListener('click', () => {
 		height="40" style="border-radius: 5px; object-fit: cover;"/>
 
         <div>
-            <p class="m-0 text-primary"><a class="link-primary underline-hover" href="">${firstname} ${lastname}</a></p>
+            <p class="m-0 text-success"><a class="link-primary underline-hover" href="">${firstname} ${lastname}</a></p>
             <p class="m-0 text-grey small">${stamp}</p>
         </div>
 

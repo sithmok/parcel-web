@@ -5,12 +5,10 @@
 
   <a class="list-group-item list-group-item-action border-bottom {% if request.resolver_match.view_name == 'admin-confirm' %} active {% endif %}" href="{% url 'admin-confirm' %}">เนื้อหารอการอนุมัติ</a>
 
-  <a class="list-group-item list-group-item-action border-bottom {% if request.resolver_match.view_name == 'admin-member' %} active {% endif %}" href="{% url 'admin-member' %}">สมาชิกยังไม่ยืนยันตัว</a>
+  <a class="list-group-item list-group-item-action border-bottom {% if request.resolver_match.view_name == 'admin-member' %} active {% endif %}" href="{% url 'admin-member' %}">สมาชิกทั้งหมด</a>
 
-  <a class="list-group-item list-group-item-action border-bottom {% if request.resolver_match.view_name == 'admin-member' %} active {% endif %}" href="{% url 'admin-member' %}">สมาชิกยืนยันตัวแล้ว</a>
+  <a class="list-group-item list-group-item-action border-bottom {% if request.resolver_match.view_name == 'admin-student-confirmed' %} active {% endif %}" href="{% url 'admin-student-confirmed' %}">สมาชิกยืนยันตัวตนแล้ว</a>
 
-  <a class="list-group-item list-group-item-action border-bottom {% if request.resolver_match.view_name == 'admin-member' %} active {% endif %}" href="{% url 'admin-member' %}">รอการยืนยันตัวตน</a>
-
-  <a class="list-group-item list-group-item-action border-bottom {% if request.resolver_match.view_name == 'admin-member' %} active {% endif %}" href="{% url 'admin-member' %}">สมาชิก</a>
+  <a class="list-group-item list-group-item-action border-bottom {% if request.resolver_match.view_name == 'admin-studentPending' %} active {% endif %}" href="{% url 'admin-studentPending' %}">สมาชิกรอการยืนยันตัวตน</a>
 
 </div>

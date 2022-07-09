@@ -56,7 +56,7 @@
                 
 
                 <div class="form-group">
-                    <form method="POST" enctype="multipart/form-data">
+                    <form method="POST" enctype="multipart/form-data" id="form">
 
                         {% csrf_token %}
 
@@ -217,49 +217,14 @@
 
                         <h4 class="text-success mt-2 mb-2">เอกสาร</h4>
                         <hr class="mt-0">
-                        <div class="mt-2" id="document1">
-                            <label for="rating"><p class="m-0">เอกสารรายละเอียดพี่เลี้ยง (PDF File)<span style="color: rgb(255, 0, 0);">*</span></p></label>
-                            <input type="file" class="form-control document1" name="document1" accept=".pdf" required/>
-                        </div>
+                        <div id="document-box">
 
-                        <div class="mt-2" id="document2">
-                            <label for="rating"><p class="m-0">โปสเตอร์ (PDF File)<span style="color: rgb(255, 0, 0);">*</span></p></label>
-                            <input type="file" class="form-control document2" name="document2" accept=".pdf" required/>
-                        </div>
-
-                        <div class="mt-2" id="document3">
-                            <label for="rating"><p class="m-0">ใบบันทึกรายละเอียด (บันทึกการฝึกสหกิจ) (PDF File)<span style="color: rgb(255, 0, 0);">*</span></p></label>
-                            <input type="file" class="form-control document3" name="document3" accept=".pdf" required/>
-                        </div>
-
-                        <div class="mt-2" id="document4">
-                            <label for="rating"><p class="m-0">จดหมายนำส่งฝึกสหกิจ (PDF File)<span style="color: rgb(255, 0, 0);">*</span></p></label>
-                            <input type="file" class="form-control document4" name="document4" accept=".pdf" required/>
-                        </div>
-
-                        <!-- internWorks -->
-
-                        <!-- <div id="lesson-input" class="mt-2">
-							<label for="form-label"><p class="m-0">ลิงก์ผลงาน (URL)</p></label>
-                            <div class="row" id="internworks-input-row">
-                                <div class="col-6 internworks-left-1 pe-1">
-                                    <input type="text" class="form-control" name="internwork" id="lessonTitle" placeholder="google, github, youtube, etc (1)"/>
-                                </div>
-                                <div class="col-6 internworks-right-1 ps-1">
-                                    <input type="text" class="form-control" name="internworkTitle" id="lessonTitle" placeholder="ชื่อผลงาน (1)"/>
-                                </div>
-                                <div class="col-12 mt-1">
-                                    <textarea class="form-control" name="internworkDetail" cols="30" rows="2" placeholder="รายละเอียดผลงาน (1)"></textarea>
-                                </div>
+                            <div class="mt-2" id="document1">
+                                <label for="rating"><p class="m-0">เอกสารรายละเอียดพี่เลี้ยง (PDF File)<span style="color: rgb(255, 0, 0);">*</span></p></label>
+                                <input type="file" class="form-control document1" name="document1" accept=".pdf" required/>
                             </div>
-						</div>
 
-						<div class="d-flex justify-content-end my-2">
-							<button class="btn btn-outline-primary btn-sm" type="button" onclick="addinternWorks()">เพิ่มช่อง</button>
-						</div> -->
-
-                        <!-- otherPostImage -->
-
+                        </div>
 
                         <div class="d-grid gap-2 mt-3">
                             <button type="submit" class="btn btn-success">ยืนยัน</button>

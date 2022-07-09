@@ -2,18 +2,17 @@
 {% load static %}
 {% block title %} สมาชิก {% endblock %}
 {% block content %}
-
 <section class="py-5">
 
-  <div class="container-lg light-style flex-grow-1 container-p-y">
+  <div class="light-style flex-grow-1 container-p-y mx-3">
 
     <div class="card overflow-hidden px-3 shadow-sm">
 
       <div class="row no-gutters row-bordered row-border-light">
-        <div class="col-md-3 pt-0 navbar-expand-lg px-0">
+        <div class="col-md-2 pt-0 navbar-expand-lg px-0">
           {% include 'admin_base.html' %}
         </div>
-        <div class="col-md-9 px-0">
+        <div class="col-md-10 px-0">
           <div class="tab-content">
             <div class="tab-pane fade active show" id="account-general">
 
@@ -39,35 +38,70 @@
                       <tr>
                         <th data-width="30" ><input type="checkbox" onClick='toggle1(this)' /></th>
                         <th scope="col" data-sortable="true">ชื่อ-นามสกุล</th>
-                        <th scope="col" data-sortable="true">อึเมล</th>
-                        <th scope="col" data-width="30" class="text-center">ดู</th>
+                        <th scope="col" data-sortable="true">อีเมล</th>
+                        <th scope="col" data-sortable="true">เลขประจำตัว</th>
+                        <th scope="col" data-width="30" class="text-center">อนุมัติ</th>
+                        <th scope="col" data-width="30" class="text-center">บัตร</th>
                         <th scope="col" data-width="30" class="text-center">ลบ</th>
                       </tr>
                     </thead>
 
                     <tbody>
-                      {% for p in profile %}
+                      {% for s in student %}
+					            {% if s.approve == False %}
                       <tr>
-                        <th style="padding: 12px;"><input type="checkbox" name="check1[]" value="{{p.pk}}"></th>
-                        <td>{{p.user.first_name}} {{p.user.last_name}}</td>
-                        <td>{{p.user.email}}</td>
-                        <td><a href="" target="_blank" class="btn btn-success"><i class="fa-solid fa-magnifying-glass"></i></a></td>
+                        <th style="padding: 12px;"><input type="checkbox" name="check1[]" value="{{s.pk}}"></th>
+                        <td>{{s.user.user.first_name}} {{s.user.user.last_name}}</td>
+                        <td>{{s.user.user.email}}</td>
+                        <td>{{s.identificationNumber}}</td>
+                        <td><a href="{% url 'updateStudentStatus' s.user_id s.id 'approve' %}" class="btn btn-outline-success btn-block">อนุมัติ</a></td>
+                        <td><a href="{{s.studentCard.url}}" target="_blank" class="btn btn-success"><i class="fa-solid fa-magnifying-glass"></i></a></td>
+                        <td><a href="" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
                       </tr>
+
+                      
+                      {% endif %}
                       {% endfor %}
                     </tbody>
 
                   </table>
 
                 </form>
+
+
+
+
+
+
               </div>
             </div>
           </div>
         </div>
+
+        <div class="modal fade" id="quizStartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header text-center">
+                <h5 class="modal-title text-center" id="exampleModalLabel">ข้อมูลสมาชิก</h5>
+              </div>
+              <div class="modal-body" id="modal-body-confirm">
+                ...
+              </div>
+              <div class="modal-footer">
+                <a type="button" id="start-button" class="btn btn-success mx-2" href="">อนุมัติ</a>
+                <button type="button" class="btn btn-light" data-dismiss="modal">ยกเลิก</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
 </section>
 
+<script src="{% static "js/confirm-member.js" %}"></script>
 <script src="{% static "js/checkboxAll.js" %}"></script>
 
 {% endblock content %}

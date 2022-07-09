@@ -40,22 +40,25 @@
                         <th data-width="30" ><input type="checkbox" onClick='toggle1(this)' /></th>
                         <th scope="col" data-sortable="true">ชื่อ-นามสกุล</th>
                         <th scope="col" data-sortable="true">อีเมล</th>
-                        <th scope="col" data-sortable="true">สถานะ</th>
-                        <th scope="col" data-width="30" class="text-center">ดู</th>
+                        <th scope="col" data-sortable="true">เลขประจำตัว</th>
+                        <th scope="col" data-width="30" class="text-center">บัตร</th>
                         <th scope="col" data-width="30" class="text-center">ลบ</th>
                       </tr>
                     </thead>
 
                     <tbody>
-                      {% for p in profile %}
+                      {% for s in student %}
+					            {% if s.approve == True %}
                       <tr>
                         <th style="padding: 12px;"><input type="checkbox" name="check1[]" value="{{s.pk}}"></th>
-                        <td>{{p.user.first_name}} {{p.user.last_name}}</td>
-                        <td>{{p.user.email}}</td>
-                        <td>{{p.usertype}}</td>
-                        <td><a href="/profile/{{p.username}}" target="_blank" class="btn btn-success"><i class="fa-solid fa-magnifying-glass"></i></a></td>
-                        <td><a href="/admin-delete-member/{{p.id}}/" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+                        <td>{{s.user.user.first_name}} {{s.user.user.last_name}}</td>
+                        <td>{{s.user.user.email}}</td>
+                        <td>{{s.identificationNumber}}</td>
+                        <td><a href="{% url 'updatePostStatus' p.id 'active' %}" class="btn btn-outline-success btn-block">อนุมัติ</a></td>
+                        <td><a href="{{s.studentCard.url}}" target="_blank" class="btn btn-success"><i class="fa-solid fa-magnifying-glass"></i></a></td>
+                        <td><a href="/admin-delete-memberApprove/{{s.id}}/" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
                       </tr>
+                      {% endif %}
                       {% endfor %}
                     </tbody>
 

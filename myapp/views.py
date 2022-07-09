@@ -82,6 +82,12 @@ def home(request):
     return render(request, 'home.html', context)
 
 def addpost(request):
+
+    if request.user.profile.usertype == 'member':
+        messages.success(request,'สามารถเพิ่มเนื้อหาได้ เมื่อคุณทำการยินยันตัวตนแล้ว')
+        return redirect('home')
+
+
     userId = request.user.profile.id
     user = Profile.objects.get(id=userId)
     prov_name = Province.objects.all()
@@ -131,23 +137,32 @@ def addpost(request):
         newPost.body4 = body4
         newPost.body5 = body5
         newPost.rating = rating
-
-        document1 = request.FILES['document1']
-        document2 = request.FILES['document2']
-        document3 = request.FILES['document3']
-        document4 = request.FILES['document4']
-        newPost.document1 = document1
-        newPost.document2 = document2
-        newPost.document3 = document3
-        newPost.document4 = document4
-
         newPost.createBy = user
         ###Save Image###
         file_thumbnail = request.FILES['thumbnail']
         newPost.thumbnail = file_thumbnail
         ################
-
         newPost.save()
+
+        if "document1" in request.FILES:
+            file_document1 = request.FILES['document1']
+            newPost.document1 = file_document1
+            newPost.save()
+
+        if "document2" in request.FILES:
+            file_document2 = request.FILES['document2']
+            newPost.document2 = file_document2
+            newPost.save()
+        
+        if "document3" in request.FILES:
+            file_document3 = request.FILES['document3']
+            newPost.document3 = file_document3
+            newPost.save()
+        
+        if "document4" in request.FILES:
+            file_document4 = request.FILES['document4']
+            newPost.document4 = file_document4
+            newPost.save()
 
         if imageTitles and images:
                 for image, imageTitle in zip(images, imageTitles):
@@ -270,6 +285,10 @@ def updatepost(request,id):
         body4 = data.get('body4')
         body5 = data.get('body5')
         rating = data.get('rating')
+        document1 = request.FILES['document1']
+        document2 = request.FILES['document2']
+        document3 = request.FILES['document3']
+        document4 = request.FILES['document4']
         imageTitles = data.getlist('imageTitle')
         images = request.FILES.getlist('image')
 
@@ -294,10 +313,6 @@ def updatepost(request,id):
         editPost.body5 = body5
         editPost.rating = rating
 
-        document1 = request.FILES['document1']
-        document2 = request.FILES['document2']
-        document3 = request.FILES['document3']
-        document4 = request.FILES['document4']
         editPost.document1 = document1
         editPost.document2 = document2
         editPost.document3 = document3
@@ -318,6 +333,8 @@ def updatepost(request,id):
             editPost_thumbnail = request.FILES['thumbnail']
             editPost.thumbnail = editPost_thumbnail
             editPost.save()
+
+            
 
         check1 = request.POST.getlist('check1[]')
         print(check1)
@@ -591,13 +608,39 @@ def admin_member (request):
 
     return render(request, 'admin_member.html', context)
 
+def admin_student_confirmed (request):
+    if request.user.profile.usertype != 'admin':
+        return redirect('home')
+
+    student = StudentPending.objects.all()
+    
+    context = {
+		'student' : student
+	}
+
+    return render(request, 'admin_student_confirmed.html', context)
+
+
 def admin_confirm (request):
     if request.user.profile.usertype != 'admin':
         return redirect('home')
 
     post = Post.objects.all()
     context = {'post':post}
+
+    if request.method == 'POST':
+        check = request.POST.getlist('check1[]')
+        print(check)
+        for p in check:
+            b = Post.objects.get(pk=p)
+            b.delete()
+
+        messages.success(request,'ลบการรออนุมัติเนื้อหาเสร็จสิ้น')
+        # return redirect(request.META['HTTP_REFERER'])
+        return redirect('admin-confirm')
+
     return render(request, 'admin_confirm.html', context)
+
 
 def admin_post(request):
     if request.user.profile.usertype != 'admin':
@@ -631,6 +674,12 @@ def admin_delete_member(request, id):
     user.delete() 
     messages.success(request,'ลบสมาชิกเสร็จสิ้น')
     return redirect('admin-member')
+
+def admin_delete_memberApprove(request, id):  
+    Student = StudentPending.objects.get(id=id)  
+    Student.delete() 
+    messages.success(request,'ลบการยืนยันตัวตนเสร็จสิ้น')
+    return redirect('admin-student-confirmed')
 
 def updatePostStatus (request, id, status):
         if request.user.profile.usertype != 'admin':
@@ -669,29 +718,31 @@ def studentRegister (request):
         
         messages.success(request,'ส่งหลักฐานยืนยันความเป็นนักศึกษาเรียบร้อย รอทางแอดมินตรวจสอบ')
         return redirect(request.META['HTTP_REFERER'])
-
+       
     return render(request, 'student-register.html')
     
-def updateStudentStatus (request, uid, tid, status):
-    if request.user.profile.userType != 'admin':
+def updateStudentStatus (request, uid, sid, status):
+    if request.user.profile.usertype != 'admin':
         return redirect('home')
         
-    StudentPending = StudentPending.objects.get(id=tid)
+    studentPending = StudentPending.objects.get(id=sid)
     profile = Profile.objects.get(id=uid)
     
     if status == 'approve':
-        StudentPending.approve = True
-        profile.userType = 'teacher'
-        StudentPending.save()
+        studentPending.approve = True
+        profile.usertype = 'student'
+        profile.apply = True
+        messages.success(request,'อนุมัติการยืนยันตัวตนเสร็จสิ้น')
+        studentPending.save()
     elif status == 'disapprove':
-        StudentPending.approve = False
-        profile.userType = 'student'
+        studentPending.approve = False
+        profile.usertype = 'member'
         profile.apply = False
-        StudentPending.delete()
-        
+        studentPending.delete()
+    
     profile.save()
-
-    return redirect ('teacher')
+    
+    return redirect ('admin-studentPending')
     
 def admin_studentPending (request):
     student = StudentPending.objects.all()
@@ -699,5 +750,16 @@ def admin_studentPending (request):
     context = {
 		'student' : student
 	}
+
+    if request.method == 'POST':
+        check = request.POST.getlist('check1[]')
+        print(check)
+        for s in check:
+            b = StudentPending.objects.get(pk=s)
+            b.delete()
+
+        messages.success(request,'ลบการรอยืนยันตัวตนเสร็จสิ้น')
+        # return redirect(request.META['HTTP_REFERER'])
+        return redirect('admin_studentPending')
     
     return render(request, 'admin_studentPending.html', context)

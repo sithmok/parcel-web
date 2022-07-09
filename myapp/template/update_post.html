@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %} แก้ไขเนื้อหาของคุณ {% endblock %}
 {% block content %}
-
+{% load cloudinary %}
 <section style="background-color: #ffffff;">
 
     <div class="container-lg pt-3 pb-3">
@@ -311,28 +311,15 @@
 
                             <h4 class="text-success mt-2 mb-2">เอกสาร</h4>
                             <hr class="mt-0">
-                            <div class="mt-2" id="document1">
-                                <label for="rating"><p class="m-0">เอกสารรายละเอียดพี่เลี้ยง (PDF File)<span style="color: rgb(255, 0, 0);">*</span></p></label>
-                                <input type="file" class="form-control document1" name="document1" accept=".pdf" />
-                                <p>Open a PDF file <a href="{{post.document1.url}}" target="_blank">example</a>.</p>
+                            <div id="document-box">
+
+                                <div class="mt-2" id="document1">
+                                    <label for="rating"><p class="m-0">เอกสารรายละเอียดพี่เลี้ยง (PDF File)<span style="color: rgb(255, 0, 0);">*</span></p></label>
+                                    <input type="file" class="form-control document1" name="document1" accept=".pdf" />
+                                </div>
+                                
                             </div>
-
-                            <div class="mt-2" id="document2">
-                                <label for="rating"><p class="m-0">โปสเตอร์ (PDF File)<span style="color: rgb(255, 0, 0);">*</span></p></label>
-                                <input type="file" class="form-control document2" name="document2" accept=".pdf" />
-                            </div>
-
-                            <div class="mt-2" id="document3">
-                                <label for="rating"><p class="m-0">ใบบันทึกรายละเอียด (บันทึกการฝึกสหกิจ) (PDF File)<span style="color: rgb(255, 0, 0);">*</span></p></label>
-                                <input type="file" class="form-control document3" name="document3" accept=".pdf" />
-                            </div>
-
-                            <div class="mt-2" id="document4">
-                                <label for="rating"><p class="m-0">จดหมายนำส่งฝึกสหกิจ (PDF File)<span style="color: rgb(255, 0, 0);">*</span></p></label>
-                                <input type="file" class="form-control document4" name="document4" accept=".pdf" />
-                            </div>
-
-
+                        
                             <div class="d-grid gap-2 mt-3">
                                 <button type="submit" class="btn btn-success">ยืนยัน</button>
                             </div>
